@@ -1,0 +1,24 @@
+package com.kh.ttip.member.model.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+import com.kh.ttip.member.model.vo.Member;
+
+@Repository
+public class MemberDao {
+
+	//회원가입
+	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("memberMapper.insertMember", m);
+	}
+
+	//로그인
+	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.loginMember", m);
+	}
+	
+	//별명 중복체크
+	public int CheckNickname(SqlSessionTemplate sqlSession, String nickname) {
+		return sqlSession.selectOne("memberMapper.nickname",nickname);
+	}
+}

@@ -34,10 +34,18 @@
     
     <!-- CSS 파일 -->
     <link rel="stylesheet" href="${contextPath }/resources/css/header.css">
-    <link rel="stylesheet" href="${contextPath }/resources/css/carousel.css">
-    <link rel="stylesheet" href="${contextPath }/resources/css/footer.css">
+<%--     <link rel="stylesheet" href="${contextPath }/resources/css/carousel.css"> --%>
+<link rel="stylesheet" href="${contextPath }/resources/css/footer.css">
 </head>
 <body>
+	<c:if test="${not empty alertMsg }">
+		<script>
+			var alertMsg = "${alertMsg}";
+			alert(alertMsg);
+		</script>
+		<c:remove var="alertMsg" />
+	</c:if>
+	
 	<header class="header">
         <div class="header-container">
             <div class="logo-selection">
@@ -50,15 +58,60 @@
                 <span class="header-element"><a href="announceMentEnroll.an?currentPage=1" id="gonggo">운봉공고</a></span>
             </div>
             <div class="center-selection">
-                <form action="" class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="어떤 서비스가 필요하세요?">
-                </form>
-            </div>
-            <div class="right-selection">
-                <span class="header-element">로그인</span>
-                <span class="header-element">회원가입</span>
-            </div>
+				<form action="" class="d-flex">
+					<input class="searchBar" type="text" placeholder="어떤 서비스가 필요하세요?">
+				</form>
+			</div>
+			<span class="header-element">프로필</span> <span class="header-element">채팅</span>
+			<c:choose>
+				<c:when test="${empty loginUser}">
+					<div class="right-selection">
+						<span class="header-element"><a
+							href="${contextPath}/login.me" id="login">로그인</a></span> <span
+							class="header-element"><a href="${contextPath}/enroll.me"
+							id="join">회원가입</a></span>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="logo-image">
+						<a href="#" onclick="toggleSelect();"> <img
+							src="${contextPath}/이미지파일경로" alt="프로필이미지" class="logo">
+						</a>
+
+						<div id="selectContainer">
+							<div class="dropdown-menu" id="dropdownMenu">
+								<span style="font-weight: bold; font-size: 16px;"> &nbsp; ${loginUser.userNickName}님 환영합니다. </span> <hr>
+								<a href="${contextPath}/mypage.me">마이페이지</a> 
+								<a href="${contextPath}/logout.me">로그아웃</a>
+							</div>
+						</div>
+					</div>
+				</c:otherwise>
+
+			</c:choose>
         </div>
     </header>
+    
+    <script>
+		function toggleSelect() {
+			var selectContainer = document.getElementById("dropdownMenu");
+			selectContainer.classList.toggle("show");
+		}
+
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+			if (!event.target.matches('.logo')) {
+				var dropdowns = document
+						.getElementsByClassName("dropdown-menu");
+				for (var i = 0; i < dropdowns.length; i++) {
+					var openDropdown = dropdowns[i];
+					if (openDropdown.classList.contains('show')) {
+						openDropdown.classList.remove('show');
+					}
+				}
+			}
+		}
+	</script>
+    
 </body>
 </html>
