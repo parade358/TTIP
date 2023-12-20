@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- 오라클 정보 + 매퍼 정보 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+	<!--
+	  	위 세줄은 이 문서의 형식이 configuration(==환경설정) 임을 알려준다.
+	  	- configuration 태그가 전체를 감싸고 있는 형태.
+	  	DTD : 유효성을 체크한다. (태그들이 configuration문서에 맞는 형식인지를 체크해준다.)
+	-->
+  
+	<configuration>
+		
+		<!-- settings : Mybatis 구동시 선언할 설정들을 작성하는 영역 -->
+		<settings>
+			<!-- 만약 null로 데이터가 전달되었다면 빈칸이 아닌 NULL로 인식하겠다 -->
+			<setting name="jdbcTypeForNull" value="NULL"/>
+		</settings>
+		
+		<typeAliases>
+			<typeAlias type="com.kh.ttip.announcement.model.vo.MainCategory" alias="mainCategory"/>
+			<typeAlias type="com.kh.ttip.announcement.model.vo.DetailCategory" alias="detailCategory"/>
+		</typeAliases>
+		
+	</configuration>
