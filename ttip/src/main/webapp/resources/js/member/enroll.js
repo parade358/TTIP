@@ -87,3 +87,58 @@ function checkNickname() {
     }
 }
 
+var num = "";
+
+$(function(){
+			
+	var email = $("#email");
+	
+	var mailBtn = $("#mailBtn");
+	
+	mailBtn.click(function(){
+		
+		$.ajax({
+			url : "sendMail.me",
+			data : {email : email.val()},
+			success : function(result){
+				num = result;
+			},error : function(){
+				console.log("통신 오류");
+			}
+		});
+	});
+				
+});
+
+let check1 = "n";
+
+
+$(function () {
+    var check = $("#check");
+    check.click(function () {
+        var inputNum = $("#checkNum").val();
+
+        if (num === inputNum) {
+        	alert("이메일 인증성공!");
+            check1 = "y";
+        } else {
+        	alert("인증번호를 확인해주세요.");
+        }
+    });
+});
+
+
+$(function () {
+    var enroll = $("#enroll");
+
+    enroll.click(function () {
+        if (check1 !== "y") {
+            alert("이메일 인증을 해주세요.");
+            return false;
+        }
+        
+        console.log("회원가입 성공");
+        
+        return true;
+    });
+});
