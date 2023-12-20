@@ -9,6 +9,9 @@
     grid-template-columns: 1fr;
     width: 30vw;
 }
+.item:nth-child(1){
+	position: sticky;
+}
 .item{
     display: grid;
     grid-template-columns: 2fr 1fr;

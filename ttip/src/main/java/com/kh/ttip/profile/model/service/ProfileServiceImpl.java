@@ -21,5 +21,9 @@ public class ProfileServiceImpl implements ProfileService{
 	public int uploadImages(HashMap<String, Object> map) {
 		return profileDao.uploadImages(map,sqlSession);
 	}
+	@Override
+	public ArrayList<Image> selectDetailImages(int userNo) {
+		return profileDao.selectDetailImages(userNo,sqlSession);
+	}
 
 }

@@ -10,4 +10,6 @@ public interface ProfileService {
 
 	int uploadImages(HashMap<String, Object> map);
 
+	ArrayList<Image> selectDetailImages(int userNo);
+
 }

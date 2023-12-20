@@ -20,6 +20,7 @@
 		<typeAliases>
 			<typeAlias type="com.kh.ttip.announcement.model.vo.MainCategory" alias="mainCategory"/>
 			<typeAlias type="com.kh.ttip.announcement.model.vo.DetailCategory" alias="detailCategory"/>
+			<typeAlias type="com.kh.ttip.profile.model.vo.Image" alias="image"/>
 		</typeAliases>
 		
 	</configuration>

@@ -16,4 +16,8 @@ public class ProfileDao {
 		return sqlSession.insert("profileMapper.uploadImages",map);
 	}
 
+	public ArrayList<Image> selectDetailImages(int userNo, SqlSession sqlSession) {
+		return (ArrayList)sqlSession.selectList("profileMapper.selectDetailImages",userNo);
+	}
+
 }

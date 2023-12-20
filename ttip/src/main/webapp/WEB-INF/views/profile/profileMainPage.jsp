@@ -15,7 +15,7 @@
     <div class="allPage">
         <div class="all-container">
             <div class="item">
-                <h2>완성도 <span class="barPercentage">50%</span></h2>
+                <h2>프로필 완성도 <span class="barPercentage">50%</span></h2>
                 <div class="edit"></div>
                 <div class="workBox">
                     <div class="progressContainer">
@@ -209,7 +209,7 @@
             <div class="item">
                 <h2>포트폴리오</h2>
                 <div class="edit">
-                    <button class="editBtn">수정</button>
+                    <a href="portfolio.pf" class="editBtn">등록</a>
                     <button class="saveBtn">저장</button>
                 </div>
                 <div class="workBox"></div>
@@ -222,6 +222,14 @@
                     <button class="saveBtn">저장</button>
                 </div>
                 <div class="workBox">
+                	<div id="saved-form">
+                            <div class="saved-div">
+                            	<div><i class="fa-solid fa-plus"></i></div>
+                            	<div class="image">
+			                        <img src="${contextPath }/${changeName}" alt="image">
+			                    </div>
+                            </div>
+                     </div>
                 </div>
             </div>
             <hr>
@@ -317,14 +325,6 @@
                             <p>이미지를 드래그 & 드랍으로 넣거나 <span class="browse">파일 찾기</span></p>
                             <input type="file" name="formData" class="file" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
                         </div>
-                
-                        <form action="" id="saved-form">
-                            <div class="header">
-                                <h3>업로드된 사진</h3>
-                                <button type="submit">Delete</button>
-                            </div>
-                            <div class="saved-div"></div>
-                        </form>
                 
                         <form action="" id="queued-form">
                         <input type="file" name="formData" class="file" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
