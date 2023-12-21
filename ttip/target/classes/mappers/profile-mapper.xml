@@ -4,6 +4,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="profileMapper">
+  	<resultMap type="image" id="imageResultSet">
+  		<result column="AT_NO" property="atNo"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+  		<result column="CHANGE_NAME" property="changeName"/>
+  		<result column="UPLOAD_DATE" property="uploadDate"/>
+  		<result column="FILE_LEVEL" property="fileLevel"/>
+  		<result column="FILE_TYPE" property="fileType"/>
+  		<result column="REF_NO" property="refNo"/>
+  	</resultMap>
   	<insert id="uploadImages" parameterType="java.util.HashMap"> 
 		INSERT INTO ATTACHMENT(AT_NO
 		                      ,ORIGIN_NAME
@@ -21,4 +30,8 @@
 		</foreach> 
 		) A 
 	</insert>
+	<select id="selectDetailImages" resultMap="imageResultSet">
+		SELECT *
+		FROM ATTACHMENT
+	</select>
   </mapper>
