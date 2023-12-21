@@ -25,13 +25,14 @@
 				<form onsubmit="return joinForm()" action="insert.me" method="post">
 					<div class="email-container">
 						<input type="text" class="input" placeholder="이메일" name="email"
-							id="email" required> <input type="button" class="input"
+							id="email" style="margin-bottom: 10px;" required> <input type="button" class="input"
 							value="전송" id="mailBtn">
 					</div>
+					<div id="countdown" style="margin-left: 95px;"></div>
 					<div class="verification-container">
-						<input type="text" class="input" placeholder="이메일 인증번호" required>
+						<input type="text" class="input" id="checkNum" placeholder="이메일 인증번호" style="margin-top: 10px;" required>
 						<div class="button-container">
-							<input type="button" class="input" value="확인">
+							<input type="button" id="check" class="input" value="확인" style="margin-top: 10px;">
 						</div>
 					</div>
 					<input type="password" class="input" placeholder="비밀번호" id="pwd"
@@ -94,7 +95,7 @@
 						type="checkbox" name="check" value="Web" id="Web" required>
 					<label for="Web">(필수) 14세 이상입니다</label>
 
-					<button class="button primary" type="submit">회원가입</button>
+					<button id="enroll" class="button primary" type="submit">회원가입</button>
 				</form>
 			</div>
 		</div>
@@ -102,8 +103,6 @@
 
 	<!-- 푸터 -->
 	<jsp:include page="../common/footer.jsp" />
-
-
 </body>
 </html>
 

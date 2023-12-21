@@ -87,3 +87,93 @@ function checkNickname() {
     }
 }
 
+var num = "";
+
+$(function(){
+			
+	var email = $("#email");
+	
+	var mailBtn = $("#mailBtn");
+	
+	mailBtn.click(function(){
+		
+		$.ajax({
+			url : "sendMail.me",
+			data : {email : email.val()},
+			success : function(result){
+				num = result;
+				setTimeout(function() {
+					num = "xxxxx";
+				}, 60000);
+			},error : function(){
+				console.log("통신 오류");
+			}
+		});
+	});
+				
+});
+
+
+let check1 = "n";
+
+
+$(function () {
+    var check = $("#check");
+    check.click(function () {
+        var inputNum = $("#checkNum").val();
+
+        if (num === inputNum) {
+        	alert("이메일 인증성공!");
+        	$("#email, #checkNum").prop('readonly', true);
+        	$("#mailBtn, #check").prop('disabled', true);
+        	$("#countdown").hide();
+            check1 = "y";
+        } else {
+        	alert("인증번호를 확인해주세요.");
+        }
+    });
+});
+
+
+$(function () {
+    var enroll = $("#enroll");
+
+    enroll.click(function () {
+        if (check1 !== "y") {
+            alert("이메일 인증을 해주세요.");
+            return false;
+        }
+        
+        console.log("회원가입 성공");
+        
+        return true;
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var countdownTime = 60;
+    var countdownInterval;
+
+    document.getElementById('mailBtn').addEventListener('click', function() {
+        clearInterval(countdownInterval);
+        countdownTime = 60;
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 1000);
+    });
+
+    function updateCountdown() {
+        var countdownElement = $("#countdown");
+
+        countdownElement.text('인증번호를 시간안에 입력해주세요 : ' + countdownTime + '초');
+
+        if (countdownTime === 0) {
+            countdownElement.css('color', 'red');
+            countdownElement.text('인증번호를 다시 발급해주세요.');
+            clearInterval(countdownInterval);
+        } else {
+            countdownElement.css('color', 'green');
+            countdownTime--;
+        }
+    }
+});

@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -161,6 +164,39 @@ public class MemberController {
 			return "NNNNY";
 		}
 	
+	}
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@RequestMapping(value = "sendMail.me", method = RequestMethod.GET)
+	@ResponseBody
+	public String mailCheck(String email) {
+		
+		String title = "TTIP 가입 인증번호입니다.";
+		String content = java.util.UUID.randomUUID().toString().replace("-", "").substring(0,10);
+		String from = "parade358@naver.com";
+		String to = email;
+		
+		MimeMessage mail = mailSender.createMimeMessage();
+		
+		MimeMessageHelper mailHelper = new MimeMessageHelper(mail, "UTF-8");
+		
+		try {
+			mailHelper.setFrom(from);
+			
+			mailHelper.setTo(to);
+			
+			mailHelper.setSubject(title);
+			
+			mailHelper.setText("이메일 인증번호는 "+content+" 입니다.");
+			
+			mailSender.send(mail);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return content;
 	}
 
 }
