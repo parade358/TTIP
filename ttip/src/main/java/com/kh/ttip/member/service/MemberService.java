@@ -13,4 +13,7 @@ public interface MemberService {
 	//별명 중복체크
 	int CheckNickname(String nickname);
 
+	//이메일 중복체크
+	int EmailSend(String emailck);
+
 }
