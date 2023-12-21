@@ -70,5 +70,12 @@
 			WHERE USER_NICKNAME= #{userNickname}
   		</select>
   		
+  		<!-- 이메일 중복체크 -->
+  		<select id="emailck" resultType="_int" parameterType="string">
+  			SELECT count(*)
+			FROM MEMBER 
+			WHERE EMAIL= #{email}
+  		</select>
+  		
   
   </mapper>

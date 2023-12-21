@@ -28,7 +28,8 @@
             </form>
             
             <!-- <p style="cursor: pointer;" onclick="alert('이메일 찾기')"><a href="#emailFindForm">이메일 찾기</a></p> -->
-            <p style="cursor: pointer;" onclick="alert('비밀번호 찾기')">
+<!--             <p style="cursor: pointer;" onclick="alert('비밀번호 찾기')"> -->
+			<p style="cursor: pointer;">
                 <a href="pwdFind.me" id="pwdFind">비밀번호 찾기</a>
             </p>
         </div>

@@ -33,4 +33,12 @@ public class MemberServiceImpl implements MemberService {
 	public int CheckNickname(String nickname) {
 		return memberDao.CheckNickname(sqlSession,nickname);
 	}
+
+	//이메일 중복체크
+	@Override
+	public int EmailSend(String emailck) {
+		return memberDao.EmailSend(sqlSession, emailck);
+	}
+	
+	
 }
