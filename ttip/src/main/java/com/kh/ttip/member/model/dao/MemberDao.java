@@ -21,4 +21,9 @@ public class MemberDao {
 	public int CheckNickname(SqlSessionTemplate sqlSession, String nickname) {
 		return sqlSession.selectOne("memberMapper.nickname",nickname);
 	}
+
+	//이메일 중복체크
+	public int EmailSend(SqlSessionTemplate sqlSession, String emailck) {
+		return sqlSession.selectOne("memberMapper.emailck", emailck);
+	}
 }

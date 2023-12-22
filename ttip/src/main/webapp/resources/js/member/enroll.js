@@ -135,6 +135,7 @@ $(function () {
 });
 
 
+
 $(function () {
     var enroll = $("#enroll");
 
@@ -177,3 +178,111 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+
+function toggleCheckboxes() {
+    var checkboxes = document.getElementsByName("check");
+    var selectAllCheckbox = document.getElementById("selectAll");
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = selectAllCheckbox.checked;
+    }
+}
+
+
+// 이메일 전송 (중복체크)
+function emailSend() {
+    var inputEmail = $("#email");
+
+    if (inputEmail.val().trim().length >= 1) {
+        $.ajax({
+            url: "emailSend.do",
+            data: { emailck: inputEmail.val() },
+            cache: false,
+            success: function (result) {
+                if (result === "NNNNN") {
+                    // 이미 사용중인 이메일 메시지 표시
+                    $("#emailCheck").show();
+                    $("#emailCheck").css("color", "red").text("이미 사용중인 이메일 입니다. 다른 이메일을 사용 해 주세요.");
+                    
+                    // 이미 사용중인 이메일일 경우 인증번호 입력을 비활성화
+                    $("#checkNum").prop("disabled", true);
+                    
+                    // 인증 메시지 및 버튼 숨김
+                    $("#countdown").hide();
+                    $("#mailBtn, #check").prop('disabled', true);
+                } else { // 사용가능
+                    // 사용 가능한 이메일 메시지 표시
+                    $("#emailCheck").show();
+                    $("#emailCheck").css("color", "green").text("사용 가능한 이메일 입니다.");
+                    
+                    // 사용 가능한 이메일일 경우 인증번호 입력을 활성화
+                    $("#checkNum").prop("disabled", false);
+                }
+            },
+            error: function () {
+                console.log("통신 오류");
+            }
+        });
+    }
+}
+
+
+
+//별명 중복체크
+function checkNickname() {
+    var inputNickName = $("#userNickName");
+
+    if (inputNickName.val().trim().length >= 1) {
+        $.ajax({
+            url: "checkNickname.do",
+            data: { nickname: inputNickName.val() },
+            success: function (result) {
+                if (result === "NNNNN") {
+                    $("#nicknameCheckResult").show();
+                    $("#nicknameCheckResult").css("color", "red").text("사용 불가능한 별명입니다.");
+                    $("button[type=submit]").attr("disabled", true);
+                } else { // 사용가능
+                    $("#nicknameCheckResult").show();
+                    $("#nicknameCheckResult").css("color", "green").text("사용 가능한 별명입니다.");
+                    $("button[type=submit]").attr("disabled", false);
+                }
+            },
+            error: function () {
+                console.log("통신 오류");
+            }
+        });
+    }
+}
+
+var num = "";
+
+
+
+
+//이용약관 모달창
+const popupBtn = document.getElementById('popupBtn');
+
+    function showDetails(type, content) {
+      const modalWrap = document.getElementById(`modalWrap${type}`);
+      modalWrap.style.display = 'block';
+      const modalBody = modalWrap.querySelector('.modalBody');
+      modalBody.innerHTML = `<span class="closeBtn" onclick="closeDetails('${type}')">&times;</span><p>${content}</p>`;
+	  	
+		    
+    }
+
+    function closeDetails(type) {
+      const modalWrap = document.getElementById(`modalWrap${type}`);
+      modalWrap.style.display = 'none';
+    }
+
+    popupBtn.onclick = function () {
+      // 전체동의 동작 추가
+    };
+
+    window.onclick = function (event) {
+      // 모달 외 다른 부분 클릭 시 모달 닫기 동작 추가
+    };
+

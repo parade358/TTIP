@@ -87,7 +87,7 @@ h5 {
 button {
     cursor: pointer;
     font-weight: bold;
-    width: 230px;
+    width: 250px;
     margin: 0 80px 30px;
     height: 45px;
     padding: 6px 15px;
@@ -119,9 +119,9 @@ button {
 .input,
 select {
     font-weight: bold;
-    width: 200px;
+    width: 220px;
     margin: 0 80px 20px;
-    height: 35px;
+    height: 40px;
     padding: 6px 15px;
     border-radius: 5px;
     outline: none;
