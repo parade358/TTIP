@@ -109,7 +109,6 @@
 						<div class="modalBody">
 							<span class="closeBtn" onclick="showDetails('DataBase')">&times;</span>
 							<a href="${contextPath}/info02.me">개인정보 수집 및 이용 내용</a>
-							ㅁㄴㅇㄴㅁㅇㅁ
 						</div>
 					</div>
 					
