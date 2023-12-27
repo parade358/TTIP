@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="chatMapper">
+  	
+  	<resultMap type="chat" id="chatResultSet">
+  		<result column="CHAT_CONTENT" property="message"/>
+  		<result column="FROM_USER" property="fromLogin"/>
+  		<result column="TO_USER" property="toLogin"/>
+  		<result column="FORMATTED_CREATE_DATE" property="createDate"/>
+  	</resultMap>
+  	
+  	<insert id="insertChat" parameterType="chat">
+  		INSERT INTO CHAT(CHAT_NO
+						,CHAT_CONTENT
+						,FROM_USER
+						,TO_USER)
+					VALUES (SEQ_CNO.NEXTVAL
+							,#{message}
+							,#{fromLogin}
+							,#{toLogin})
+  	</insert>
+  	
+  	
+  	<select id="selectChat" resultMap="chatResultSet">
+	  	SELECT CHAT_CONTENT, FROM_USER, TO_USER, TO_CHAR(CREATE_DATE, 'MM"월" DD"일" HH24:MI') AS FORMATTED_CREATE_DATE
+		FROM CHAT
+		WHERE STATUS = 'Y'
+		AND (FROM_USER = #{fromLogin} OR FROM_USER = #{toLogin})
+		AND (TO_USER = #{toLogin} OR TO_USER = #{fromLogin})
+		ORDER BY CREATE_DATE
+  	</select>
+  
+  
+  </mapper>
