@@ -58,7 +58,7 @@
 					</a>
             </div>
             <div class="left-selection">
-                <span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">TTIP</a></span>
+                <span class="header-element"><a href="profile.pr" class="header-Btn" style="text-decoration: none;color: black;">프로필</a></span>
                 <span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">공지사항</a></span>
                 <span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">커뮤니티</a></span>
                 <span class="header-element"><a href="announceMentEnroll.an?currentPage=1" class="header-Btn" style="text-decoration: none;color: black;">재능교환</a></span>
