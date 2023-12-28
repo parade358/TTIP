@@ -29,7 +29,6 @@
                 <button class="button primary" id="findPwd">인증번호 전송</button>
                 <input type="text" class="input" placeholder="인증번호" id="code" style="display: none;">
 				<button class="button primary" id="codeBtn" style="display: none;">인증하기</button>
-                <div id="countdown"></div>
 
                 <h4>가입하셨던 이메일 주소를 입력해주시면 <br>
                     인증번호를 메일로 보내드립니다.<br>

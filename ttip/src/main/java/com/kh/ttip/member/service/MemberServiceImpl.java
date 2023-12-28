@@ -39,6 +39,12 @@ public class MemberServiceImpl implements MemberService {
 	public int EmailSend(String emailck) {
 		return memberDao.EmailSend(sqlSession, emailck);
 	}
+
+	@Override
+	public int findPwdCheck(String email) {
+		// TODO Auto-generated method stub
+		return memberDao.findPwdCheck(sqlSession, email);
+	}
 	
 	
 }

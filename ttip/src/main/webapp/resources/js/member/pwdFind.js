@@ -1,5 +1,7 @@
 var num = "";
 
+var check = "n";
+
 $(function(){
 			
 	var email = $("#email");
@@ -12,21 +14,36 @@ $(function(){
 	
 	mailBtn.click(function(){
 	
-		codeInput.show();
-		codeBtn.show();
-	
 		$.ajax({
-			url : "findPwd.me",
+			url : "findPwdCheck.me",
 			data : {email : email.val()},
 			success : function(result){
-				num = result;
-				setTimeout(function() {
-					num = "xxxxx";
-				}, 60000);
+				
+				if(result>0){
+					ckeck = "y";
+					codeInput.show();
+					codeBtn.show();
+					$.ajax({
+						url : "findPwd.me",
+						data : {email : email.val()},
+						success : function(result){
+							num = result;
+							setTimeout(function() {
+								num = "xxxxx";
+							}, 60000);
+						},error : function(){
+							console.log("통신 오류");
+						}
+					});
+				}else{
+					alert("입력하신 이메일로 가입된 회원이 없습니다.");
+				}
+				
 			},error : function(){
 				console.log("통신 오류");
 			}
 		});
+	
 	});
 				
 });
@@ -45,33 +62,6 @@ $(function () {
         	alert("인증번호를 확인해주세요.");
         }
     });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var countdownTime = 60;
-    var countdownInterval;
-
-    document.getElementById('findPwd').addEventListener('click', function() {
-        clearInterval(countdownInterval);
-        countdownTime = 60;
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-    });
-
-    function updateCountdown() {
-        var countdownElement = $("#countdown");
-
-        countdownElement.text('인증번호를 시간안에 입력해주세요 : ' + countdownTime + '초');
-
-        if (countdownTime === 0) {
-            countdownElement.css('color', 'red');
-            countdownElement.text('인증번호를 다시 발급해주세요.');
-            clearInterval(countdownInterval);
-        } else {
-            countdownElement.css('color', 'green');
-            countdownTime--;
-        }
-    }
 });
 
 
