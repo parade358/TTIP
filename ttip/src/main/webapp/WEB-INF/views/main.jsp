@@ -32,6 +32,42 @@
 	      cursor: pointer;
 	      margin-top: -5px;
     	}
+    	
+    	#hot {
+		    height: 500px;
+		    width: 950px;
+		    background-color: beige;
+		    border-radius: 10px;
+		    display: flex;
+		    justify-content: space-around;
+		    margin-left: auto;
+		    margin-right: auto;
+		    margin-bottom: 30px;
+		}
+		
+    	#hotTalent {
+		    height: 500px;
+		    width: 950px;
+		    background-color: #3282F6;
+		    border-radius: 10px;
+		    display: flex;
+		    justify-content: space-around;
+		    margin-left: auto;
+		    margin-right: auto;
+		    margin-bottom: 30px;
+		}
+		
+    	#etc {
+		    height: 500px;
+		    width: 950px;
+		    background-color: #C8BFE7;
+		    border-radius: 10px;
+		    display: flex;
+		    justify-content: space-around;
+		    margin-left: auto;
+		    margin-right: auto;
+		    margin-bottom: 30px;
+		}
   </style>
 	
 	
@@ -94,7 +130,19 @@
     	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/picture.png" class="btnImg"><p>사진</p></div>
     	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
     	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
-    </div>  
+    </div> 
+    
+    <div align="center" id="hot">
+    	인기게시글
+    </div> 
+    
+    <div align="center" id="hotTalent">
+    	인기있는 재능
+    </div>
+    
+    <div align="center" id="etc">
+    	기타 등등
+    </div> 
 
     <!-- 푸터 -->
     <jsp:include page="common/footer.jsp"/>
