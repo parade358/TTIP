@@ -136,7 +136,6 @@ public class MemberController {
 	@RequestMapping("checkNickname.do")
 	public String CheckNickname(String nickname) {
 
-		System.out.println(nickname);
 		int count = memberService.CheckNickname(nickname);
 
 		if (count > 0) {
@@ -151,7 +150,6 @@ public class MemberController {
 	@RequestMapping("emailSend.do")
 	public String EmailSend(String emailck) {
 		
-		System.out.println(emailck);
 		int count = memberService.EmailSend(emailck);
 
 		if (count > 0) {
@@ -210,6 +208,16 @@ public class MemberController {
 		}
 		return code;
 	}
+	
+	
+		@ResponseBody
+		@RequestMapping("findPwdCheck.me")
+		public int findPwdCheck(String email) {
+			
+			int result = memberService.findPwdCheck(email);
+			System.out.println("??");
+			return result;
+		}
 	
 	@RequestMapping(value = "findPwd.me", method = RequestMethod.GET)
 	@ResponseBody
@@ -276,4 +284,6 @@ public class MemberController {
 		
 		return "member/newPwd";
 	}
+	
+	
 }

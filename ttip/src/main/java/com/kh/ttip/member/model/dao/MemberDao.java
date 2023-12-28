@@ -26,4 +26,9 @@ public class MemberDao {
 	public int EmailSend(SqlSessionTemplate sqlSession, String emailck) {
 		return sqlSession.selectOne("memberMapper.emailck", emailck);
 	}
+
+	public int findPwdCheck(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("memberMapper.findPwdCheck", email);
+	}
 }
