@@ -7,11 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTIP</title>
     
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    
     <!-- 부트스트랩 연결 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/carousel.css">
+	
+	<style>
+		.btnImg{
+			width : 50px;
+			height : 50px
+		}
+		
+	    .hover03 {
+	      -webkit-transition: margin 0.2s ease-in-out;
+	      transition: margin 0.2s ease-in-out;
+	    }
+	
+	    .hover03:hover {
+	      cursor: pointer;
+	      margin-top: -5px;
+    	}
+  </style>
+	
+	
 </head>
 <body>
 	
@@ -19,7 +42,7 @@
     <%@include file="common/header.jsp" %>
 
     <!--캐러셀-->
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" align="center">
+	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" align="center" style="margin-bottom: 30px;">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -44,7 +67,34 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-      </div>
+	</div>
+      
+    <div id="mainBtn1" style="display: flex;
+							  justify-content: space-evenly;
+							  margin-left: auto;
+    						  margin-right: auto;
+							  width: 970px;
+							  margin-bottom: 30px;"
+							  align="center">
+    
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/art.png" class="btnImg"><p>미술</p></div>
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/dance.png" class="btnImg"><p>춤</p></div>
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/hobby.png" class="btnImg"><p>취미</p></div>
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/language.png" class="btnImg"><p>외국어</p></div>
+    
+    </div>  
+    <div id="mainBtn2" style="display: flex;
+						      justify-content: space-evenly;
+						      margin-left: auto;
+    						  margin-right: auto;
+						      width: 970px;
+						      margin-bottom: 30px;"
+						      align="center">
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/music.png" class="btnImg"><p>악기</p></div>
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/picture.png" class="btnImg"><p>사진</p></div>
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
+    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
+    </div>  
 
     <!-- 푸터 -->
     <jsp:include page="common/footer.jsp"/>

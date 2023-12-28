@@ -20,9 +20,6 @@
     
     <!-- 구글 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-   
-    <!-- JS파일 -->
-    <script src="${contextPath }/resources/js/carousel.js"></script>
     
     <!-- CSS 파일 -->
     <link rel="stylesheet" href="${contextPath }/resources/css/header.css">
@@ -40,7 +37,9 @@
 	<header class="header">
         <div class="header-container">
             <div class="logo-selection">
-                    <img src="${contextPath }/resources/main/logo.png" alt="logo" class="logo" onclick="">
+                    <a href="${contextPath}">
+    					<img src="${contextPath}/resources/main/logo.png" alt="logo" class="logo">
+					</a>
             </div>
             <div class="left-selection">
                 <span class="header-element">공지사항</span>
