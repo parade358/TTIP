@@ -46,6 +46,7 @@ public class ProfileController {
 	//파일명 수정 모듈
 			public String saveFile(MultipartFile upfile
 								  ,HttpSession session) {
+				System.out.println("유성이형 사랑해");
 				//파일명 수정하기
 				//1. 원본파일명 추출
 				String originName = upfile.getOriginalFilename();
