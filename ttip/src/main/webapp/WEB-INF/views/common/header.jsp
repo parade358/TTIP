@@ -20,13 +20,26 @@
     
     <!-- 구글 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-   
-    <!-- JS파일 -->
-    <script src="${contextPath }/resources/js/carousel.js"></script>
     
     <!-- CSS 파일 -->
     <link rel="stylesheet" href="${contextPath }/resources/css/header.css">
 	<link rel="stylesheet" href="${contextPath }/resources/css/footer.css">
+	
+	 <style>
+	    .searchBar {
+	      width: 250px;
+	      padding: 10px;
+	      font-size: 16px;
+	      border: 0px;
+	      border-radius: 5px;
+	      outline: none;
+	      background-color : #F4F4F4;
+	    }
+	
+	    .searchBar::placeholder {
+	      color: #999;
+	    }
+	  </style>
 </head>
 <body>
 	<c:if test="${not empty alertMsg }">
@@ -40,40 +53,40 @@
 	<header class="header">
         <div class="header-container">
             <div class="logo-selection">
-                    <img src="${contextPath }/resources/main/logo.png" alt="logo" class="logo" onclick="">
+                    <a href="${contextPath}">
+    					<img src="${contextPath}/resources/main/logo.png" alt="logo" class="logo">
+					</a>
             </div>
             <div class="left-selection">
-                <span class="header-element">공지사항</span>
-                <span class="header-element">커뮤니티</span>
-                <span class="header-element"><a href="profile.pr">프로필</a></span>
-                <span class="header-element"><a href="announceMentEnroll.an?currentPage=1" id="gonggo">운봉공고</a></span>
+                <span class="header-element"><a href="profile.pr" class="header-Btn" style="text-decoration: none;color: black;">프로필</a></span>
+                <span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">공지사항</a></span>
+                <span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">커뮤니티</a></span>
+                <span class="header-element"><a href="announceMentEnroll.an?currentPage=1" class="header-Btn" style="text-decoration: none;color: black;">재능교환</a></span>
             </div>
             <div class="center-selection">
 				<form action="" class="d-flex">
 					<input class="searchBar" type="text" placeholder="어떤 서비스가 필요하세요?">
 				</form>
 			</div>
-			<span class="header-element">프로필</span> <span class="header-element">채팅</span>
 			<c:choose>
 				<c:when test="${empty loginUser}">
 					<div class="right-selection">
-						<span class="header-element"><a
-							href="${contextPath}/login.me" id="login">로그인</a></span> <span
-							class="header-element"><a href="${contextPath}/enroll.me"
-							id="join">회원가입</a></span>
+						<span class="header-element"><a href="${contextPath}/login.me" id="login" style="text-decoration: none;color: black;">로그인</a></span> 
+						<span class="header-element"><a href="${contextPath}/enroll.me" id="join" style="text-decoration: none;color: black;">회원가입</a></span>
 					</div>
 				</c:when>
 				<c:otherwise>
+					<span class="header-element"><a href="profile.pr" class="header-Btn" style="text-decoration: none;color: black;">프로필</a></span>
+					<span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">채팅</a></span>
 					<div class="logo-image">
 						<a href="#" onclick="toggleSelect();"> <img
 							src="${contextPath}/이미지파일경로" alt="프로필이미지" class="logo">
 						</a>
-
 						<div id="selectContainer">
 							<div class="dropdown-menu" id="dropdownMenu">
 								<span style="font-weight: bold; font-size: 16px;"> &nbsp; ${loginUser.userNickName}님 환영합니다. </span> <hr>
-								<a href="${contextPath}/mypage.me">마이페이지</a> 
-								<a href="${contextPath}/logout.me">로그아웃</a>
+								<a href="${contextPath}/mypage.me" class="header-Btn">마이페이지</a>
+								<a href="${contextPath}/logout.me" class="header-Btn">로그아웃</a>
 							</div>
 						</div>
 					</div>

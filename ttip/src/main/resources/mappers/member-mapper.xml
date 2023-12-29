@@ -77,5 +77,10 @@
 			WHERE EMAIL= #{email}
   		</select>
   		
+  		<select id="findPwdCheck" resultType="_int" parameterType="string">
+  			SELECT count(*)
+			FROM MEMBER 
+			WHERE EMAIL= #{email}
+  		</select>
   
   </mapper>

@@ -84,5 +84,12 @@ public class AnnounceController {
 		return list;
 	}
 	
-
+	
+	@RequestMapping("announceMentList.an")
+	public String announceMentList(String category) {
+		
+		System.out.println(category);
+		
+		return "announcement/announceMentListView";
+	}
 }

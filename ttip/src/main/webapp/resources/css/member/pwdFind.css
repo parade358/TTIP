@@ -24,7 +24,7 @@ h4 {
 h4 {
     color: #777;
     font-size: 14px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 .root {
@@ -78,7 +78,7 @@ h5 {
 .form-wrapper {
     background-color: white;
     width: 400px;
-    height: 450px;
+    height: auto;
     padding: 20px 0;
     margin: 20px auto;
     border-radius: 15px;
@@ -169,4 +169,12 @@ p {
             color: #009688;
         }
     }
+}
+
+.message {
+    color: green;
+}
+
+.error-message {
+    color: red;
 }

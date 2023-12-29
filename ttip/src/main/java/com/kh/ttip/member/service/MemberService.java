@@ -19,4 +19,6 @@ public interface MemberService {
 	//회원정보 재조회
 	Member memberSessionReinsert(String email);
 
+	int findPwdCheck(String email);
+
 }

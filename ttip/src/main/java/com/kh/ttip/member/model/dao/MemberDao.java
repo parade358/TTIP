@@ -30,4 +30,9 @@ public class MemberDao {
 	public Member memberSessionReinsert(String email, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("memberMapper.loginMember", email);
 	}
+
+	public int findPwdCheck(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("memberMapper.findPwdCheck", email);
+	}
 }

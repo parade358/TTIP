@@ -25,8 +25,8 @@
 				<form onsubmit="return joinForm()" action="insert.me" method="post">
 					<div class="email-container">
 						<input type="text" class="input" placeholder="이메일" name="email"
-							id="email" required> 
-							<input type="button" class="input" value="전송" id="mailBtn" onclick="emailSend();">
+							id="email" required> <input type="button" class="input"
+							value="전송" id="mailBtn" onclick="emailSend();">
 					</div>
 					<div id="emailCheck" style="display: none;"></div>
 					<div class="verification-container">
@@ -82,37 +82,33 @@
 
 
 					<div class="category-container">
-						<input type="button" class="input" value="재능" name="categoryNo"
-							required>
+<!-- 						<input type="button" class="input" value="재능" name="categoryNo" required> -->
 					</div>
 
-					<input type="checkbox" id="selectAll" onclick="toggleCheckboxes()" required> 
-						<label for="selectAll">전체동의</label><br> 
-						<input type="checkbox" name="check" value="Java" id="Java" required>
-						<label for="Java">(필수) 이용약관 동의</label> 
-						<a href="#" class="view-link" onclick="showDetails('Java', '이용약관 내용')">보기</a><br>
-					<input type="checkbox" name="check" value="DataBase" id="DataBase" required> 
-						<label for="DataBase">(필수) 개인정보 수집 및 이용 동의</label> 
-						<a href="#" class="view-link" onclick="showDetails('DataBase', '개인정보 수집 및 이용 내용')">보기</a><br> 
-						<input type="checkbox" name="check" value="Web" id="Web" required>
+					<input type="checkbox" id="selectAll" onclick="toggleCheckboxes()"
+						required> <label for="selectAll">전체동의</label><br> <input
+						type="checkbox" name="check" value="Java" id="Java" required>
+					<label for="Java">(필수) 이용약관 동의</label> <a href="#"
+						class="view-link" onclick="showDetails_1('Java')">보기</a><br>
+					<input type="checkbox" name="check" value="DataBase" id="DataBase"
+						required> <label for="DataBase">(필수) 개인정보 수집 및 이용
+						동의</label> <a href="#" class="view-link"
+						onclick="showDetails_2('DataBase')">보기</a><br> <input
+						type="checkbox" name="check" value="Web" id="Web" required>
 					<label for="Web">(필수) 14세 이상입니다</label>
 
-					<div id="modalWrapJava" class="modalWrap">
+					<div id="modalWrap_1Java" class="modalWrap">
 						<div class="modalBody">
-							<span class="closeBtn" onclick="closeDetails('Java')">&times;</span>
-							
-							<a href="${contextPath}/info01.me">이용약관 내용</a>
+							<span class="closeBtn" onclick="closeDetails_1('Java')">&times;</span>
 						</div>
 					</div>
 
-					<div id="modalWrapDataBase" class="modalWrap">
+					<div id="modalWrap_2DataBase" class="modalWrap">
 						<div class="modalBody">
-							<span class="closeBtn" onclick="showDetails('DataBase')">&times;</span>
-							<a href="${contextPath}/info02.me">개인정보 수집 및 이용 내용</a>
-							ㅁㄴㅇㄴㅁㅇㅁ
+							<span class="closeBtn" onclick="closeDetails_2('DataBase')">&times;</span>
 						</div>
 					</div>
-					
+
 					<div class="reset button">
 						<button id="enroll" class="button primary" type="submit">회원가입</button>
 						<button id="reset" type="reset">초기화</button>

@@ -6,11 +6,6 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +30,8 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-
+	
+	
 	// 로그인 페이지로 이동
 	@RequestMapping("login.me")
 	public String loginForm() {
@@ -152,7 +148,6 @@ public class MemberController {
 	@RequestMapping("checkNickname.do")
 	public String CheckNickname(String nickname) {
 
-		System.out.println(nickname);
 		int count = memberService.CheckNickname(nickname);
 
 		if (count > 0) {
@@ -167,7 +162,6 @@ public class MemberController {
 	@RequestMapping("emailSend.do")
 	public String EmailSend(String emailck) {
 		
-		System.out.println(emailck);
 		int count = memberService.EmailSend(emailck);
 
 		if (count > 0) {
@@ -185,40 +179,123 @@ public class MemberController {
 	public String mailCheck(String email) {
 
 		String title = "TTIP 가입 인증번호입니다.";
-		String content = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+		String code = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 10);
 		String from = "parade358@naver.com";
 		String to = email;
+		
+		String body = "<html>"
+	            + "<body style='font-family: \"Nanum Gothic\", sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;'>"
+	            + "  <div style='max-width: 600px; margin: 30px auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);'>"
+	            + "    <h2 style='color: #333;'>이메일 인증</h2>"
+	            + "    <p style='color: #666;'>안녕하세요. TTIP에 가입해 주셔서 감사합니다. <br><br> 회원가입을 완료하려면 아래의 인증번호를 입력해주세요</p><br>"
+	            + "    <p style='font-size: 24px; color: #007BFF; margin-bottom: 20px;'>" + code + "</p>"
+	            + "    <p style='color: #666;'>만약 이메일 인증 요청을 안하셨다면 무시하셔도 됩니다.</p>"
+	            + "    <div style='margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; color: #666; color: #999; font-size: 12px;'>"
+	            + "      <p>본 메일은 발신 전용 메일이며, 회신되지 않으므로 문의사항은 고객센터를 이용해주세요.<br>"
+	            + "			COPYRIGHTS (C)TTIP ALL RIGHTS RESERVED."
+	            + "		</p>"
+	            + "    </div>"
+	            + "  </div>"
+	            + "</body>"
+	            + "</html>";
 
-		MimeMessage mail = mailSender.createMimeMessage();
-
-		MimeMessageHelper mailHelper = new MimeMessageHelper(mail, "UTF-8");
 
 		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+			
 			mailHelper.setFrom(from);
 
 			mailHelper.setTo(to);
 
 			mailHelper.setSubject(title);
 
-			mailHelper.setText("이메일 인증번호는 " + content + " 입니다.");
+			mailHelper.setText(body,true);
 
 			mailSender.send(mail);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return content;
+		return code;
 	}
+	
+	
+		@ResponseBody
+		@RequestMapping("findPwdCheck.me")
+		public int findPwdCheck(String email) {
+			
+			int result = memberService.findPwdCheck(email);
+			System.out.println("??");
+			return result;
+		}
+	
+	@RequestMapping(value = "findPwd.me", method = RequestMethod.GET)
+	@ResponseBody
+	public String findPwd(String email) {
 
-//이용약관 동의 
+		String title = "TTIP 비밀번호 재설정 인증번호입니다.";
+		String code = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+		String from = "parade358@naver.com";
+		String to = email;
+		
+		String body = "<html>"
+	            + "<body style='font-family: \"Nanum Gothic\", sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;'>"
+	            + "  <div style='max-width: 600px; margin: 30px auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);'>"
+	            + "    <h2 style='color: #333;'>비밀번호 재설정</h2>"
+	            + "    <p style='color: #666;'>비밀번호 재설정 인증번호입니다. <br><br> 비밀번호를 재설정 하려면 아래의 인증번호를 입력해주세요</p><br>"
+	            + "    <p style='font-size: 24px; color: #007BFF; margin-bottom: 20px;'>" + code + "</p>"
+	            + "    <p style='color: #666;'>만약 인증 요청을 안하셨다면 무시하셔도 됩니다.</p>"
+	            + "    <div style='margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; color: #666; color: #999; font-size: 12px;'>"
+	            + "      <p>본 메일은 발신 전용 메일이며, 회신되지 않으므로 문의사항은 고객센터를 이용해주세요.<br>"
+	            + "			COPYRIGHTS (C)TTIP ALL RIGHTS RESERVED."
+	            + "		</p>"
+	            + "    </div>"
+	            + "  </div>"
+	            + "</body>"
+	            + "</html>";
+
+
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+			
+			mailHelper.setFrom(from);
+
+			mailHelper.setTo(to);
+
+			mailHelper.setSubject(title);
+
+			mailHelper.setText(body,true);
+
+			mailSender.send(mail);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return code;
+	}
+	
+
+    //이용약관 동의
 	@RequestMapping("info01.me")
 	public String info01() {
 		return "member/info01";
 	}
 
-//개인정보 동의
+	//개인정보 동의
 	@RequestMapping("info02.me")
 	public String info02() {
 		return "member/info02";
 	}
+	
+	@RequestMapping("newPwd.me")
+	public String newPwd() {
+		
+		return "member/newPwd";
+	}
+	
+	
 }
