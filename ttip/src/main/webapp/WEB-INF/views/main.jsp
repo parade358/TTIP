@@ -113,10 +113,10 @@
 							  margin-bottom: 30px;"
 							  align="center">
     
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/art.png" class="btnImg"><p>미술</p></div>
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/dance.png" class="btnImg"><p>춤</p></div>
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/hobby.png" class="btnImg"><p>취미</p></div>
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/language.png" class="btnImg"><p>외국어</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/art.png" class="btnImg"><p>미술</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/dance.png" class="btnImg"><p>댄스</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/hobby.png" class="btnImg"><p>취미</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/language.png" class="btnImg"><p>외국어</p></div>
     
     </div>  
     <div id="mainBtn2" style="display: flex;
@@ -126,10 +126,10 @@
 						      width: 970px;
 						      margin-bottom: 30px;"
 						      align="center">
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/music.png" class="btnImg"><p>악기</p></div>
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/picture.png" class="btnImg"><p>사진</p></div>
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
-    	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/music.png" class="btnImg"><p>악기</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/picture.png" class="btnImg"><p>사진</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
+    	<div class="hover03" style="height: 70px;" onclick="navigateToAnnounceMentList()"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
     </div> 
     
     <div align="center" id="hot">
@@ -146,6 +146,14 @@
 
     <!-- 푸터 -->
     <jsp:include page="common/footer.jsp"/>
+    
+    <script>
+	  // hover03 div 클릭 이벤트 처리 함수
+	  function navigateToAnnounceMentList() {
+	    window.location.href = 'announceMentList.an';  // 이 부분에 매핑하고자 하는 주소를 넣으세요.
+	  }
+	</script>
+    
 
 </body>
 </html>
