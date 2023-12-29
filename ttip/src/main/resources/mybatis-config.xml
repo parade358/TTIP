@@ -21,6 +21,8 @@
 			<typeAlias type="com.kh.ttip.announcement.model.vo.MainCategory" alias="mainCategory"/>
 			<typeAlias type="com.kh.ttip.announcement.model.vo.DetailCategory" alias="detailCategory"/>
 			<typeAlias type="com.kh.ttip.member.model.vo.Member" alias="member"/>
+			<typeAlias type="com.kh.ttip.profile.model.vo.Image" alias="image"/>
+			<typeAlias type="com.kh.ttip.profile.model.vo.Profile" alias="profile"/>
 			<typeAlias type="com.kh.ttip.javamaster.model.vo.MessageModel" alias="chat"/>
 		</typeAliases>
 		

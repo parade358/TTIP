@@ -41,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public Member memberSessionReinsert(String email) {
+		return memberDao.memberSessionReinsert(email,sqlSession);
+	}
+
+	@Override
 	public int findPwdCheck(String email) {
 		// TODO Auto-generated method stub
 		return memberDao.findPwdCheck(sqlSession, email);
