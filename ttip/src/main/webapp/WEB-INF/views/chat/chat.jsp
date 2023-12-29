@@ -36,7 +36,7 @@
 <body>
 	<%@ include file="../common/header.jsp" %>
 
-	<div class="container clearfix" style="padding-right: 0px;padding-left: 0px;">
+	<div class="container2 clearfix" style="padding-right: 0px;padding-left: 0px;">
     <div class="people-list" id="people-list">
         <div class="search">
             <button onclick="registration()">Enter the chat</button>
@@ -79,7 +79,7 @@
     	
     	<script>
     	
-	    	const url = 'http://localhost:8888/spring';
+	    	const url = 'http://localhost:8888/ttip';
 	    	let stompClient;
 	    	let selectedUser;
 	    	let newMessages = new Map();
@@ -122,7 +122,7 @@
 	
 	    	function registration() {
 	    		
-	    	    let userName = '${loginUser.userId}';
+	    	    let userName = '${loginUser.userNickName}';
 	
 	    	    $.ajax({
 	    	        type: "POST",
@@ -143,7 +143,7 @@
 
 	    	function selectUser(userName) {
 	    	    console.log("selecting users: " + userName);
-	    	    let fromId = '${loginUser.userId}';
+	    	    let fromId = '${loginUser.userNickName}';
 	    	    selectedUser = userName;
 	    	    let isNew = document.getElementById("newMessage_" + userName) !== null;
 	    	    if (isNew) {
@@ -253,7 +253,7 @@
 	    	}
 	
 	    	function sendMessage(message) {
-	    	    let username = '${loginUser.userId}';
+	    	    let username = '${loginUser.userNickName}';
 	    	    console.log(username)
 	    	    sendMsg(username, message);
 	    	    scrollToBottom();

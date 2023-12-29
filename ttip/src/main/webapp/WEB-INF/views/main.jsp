@@ -153,6 +153,8 @@
 	    window.location.href = 'announceMentList.an';  // 이 부분에 매핑하고자 하는 주소를 넣으세요.
 	  }
 	</script>
+	
+	
     
 
 </body>

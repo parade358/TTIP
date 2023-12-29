@@ -55,3 +55,11 @@ body {
     height: 60px;
 }
 
+#dropdownMenu{
+    right: 700px;
+    left: 1525px;
+	/* margin-left: 1325px; */
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}

@@ -77,15 +77,14 @@
 				</c:when>
 				<c:otherwise>
 					<span class="header-element"><a href="profile.pr" class="header-Btn" style="text-decoration: none;color: black;">프로필</a></span>
-					<span class="header-element"><a href="" class="header-Btn" style="text-decoration: none;color: black;">채팅</a></span>
+					<span class="header-element"><a href="chat" class="header-Btn" style="text-decoration: none;color: black;">채팅</a></span>
 					<div class="logo-image">
-						<a href="#" onclick="toggleSelect();"> <img
-							src="${contextPath}/이미지파일경로" alt="프로필이미지" class="logo">
+						<a href="#" onclick="toggleSelect();"> <img src="${contextPath}/resources/image/userImg.png" alt="프로필이미지" class="logo">
 						</a>
 						<div id="selectContainer">
 							<div class="dropdown-menu" id="dropdownMenu">
 								<span style="font-weight: bold; font-size: 16px;"> &nbsp; ${loginUser.userNickName}님 환영합니다. </span> <hr>
-								<a href="${contextPath}/mypage.me" class="header-Btn">마이페이지</a>
+								<a href="${contextPath}/mypage.me" class="header-Btn" >마이페이지</a><br>
 								<a href="${contextPath}/logout.me" class="header-Btn">로그아웃</a>
 							</div>
 						</div>
