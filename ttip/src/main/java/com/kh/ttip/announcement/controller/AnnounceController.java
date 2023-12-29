@@ -1,12 +1,16 @@
 package com.kh.ttip.announcement.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttip.announcement.model.service.AnnounceService;
 import com.kh.ttip.announcement.model.vo.DetailCategory;
@@ -51,6 +55,35 @@ public class AnnounceController {
 		
 		return "";
 	}
+	@ResponseBody
+	@RequestMapping("selectMainCategoryModal.an")
+	public HashMap<String, Object> selectMainCategoryModal(int currentPage){
+		
+		HashMap<String, Object> map = new HashMap<>();
+		ArrayList<MainCategory> list = announceService.selectMainCategory();
+		map.put("list",list);
+		map.put("currentPage", currentPage);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping("selectDetailCategoryModal.an")
+	public ArrayList<DetailCategory> selectDetailCategoryModal(Model model
+									  ,@RequestParam(value="checkedCategory[]") int[] arrayParams
+			
+														) {
+		
+		
+	/*
+	 * int[] realCheckedCategory = new int[10]; for(int i=0;
+	 * i<checkedCategory.length; i++) { if (checkedCategory[i]
+	 * != null) { realCheckedCategory[i] =
+	 * Integer.parseInt(checkedCategory[i]); } else { break; } }
+	 */
+		ArrayList<DetailCategory> list = announceService.selectDetailCategory(arrayParams);
+		
+		return list;
+	}
+	
 	
 	@RequestMapping("announceMentList.an")
 	public String announceMentList(String category) {

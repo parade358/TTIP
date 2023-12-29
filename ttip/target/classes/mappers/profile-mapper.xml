@@ -4,6 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="profileMapper">
+  	<resultMap type="image" id="imageResultSet">
+  		<result column="AT_NO" property="atNo"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+  		<result column="CHANGE_NAME" property="changeName"/>
+  		<result column="UPLOAD_DATE" property="uploadDate"/>
+  		<result column="FILE_LEVEL" property="fileLevel"/>
+  		<result column="FILE_TYPE" property="fileType"/>
+  		<result column="REF_NO" property="refNo"/>
+  	</resultMap>
+  	<resultMap type="profile" id="profileResultSet">
+  		<result column="PROFILE_NO" property="profileNo"/>
+  		<result column="REVIEW_COUNT" property="reviewCount"/>
+  		<result column="REVIEW_AVERAGE" property="reviewAverage"/>
+  		<result column="SUB_SERVICE" property="subService"/>
+  		<result column="ONELINE_INTRO" property="oneLineIntro"/>
+  		<result column="APPROVE_YN" property="approveYN"/>
+  		<result column="PHONE_AVAILABLE" property="phoneAvailable"/>
+  		<result column="SERVICE_DETAIL_CONTENT" property="serviceDetailContent"/>
+  	</resultMap>
+  	
   	<insert id="uploadImages" parameterType="java.util.HashMap"> 
 		INSERT INTO ATTACHMENT(AT_NO
 		                      ,ORIGIN_NAME
@@ -21,4 +41,35 @@
 		</foreach> 
 		) A 
 	</insert>
+	<select id="selectDetailImages" resultMap="imageResultSet">
+		SELECT *
+		FROM ATTACHMENT
+	</select>
+	<update id="updateNickname">
+		UPDATE MEMBER
+		SET USER_NICKNAME = #{changedNickname}
+		WHERE USER_NO = #{userNo}
+	</update>
+	<insert id="insertSubCategory">
+		INSERT INTO PROFILE(PROFILE_NO
+						   ,SUB_SERVICE
+						   ,USER_NO)
+		VALUES(SEQ_PNO.NEXTVAL
+			  ,#{realCheckedCategory}
+			  ,#{userNo})
+	</insert>
+	<select id="selectAllProfileInfo" resultMap="profileResultSet">
+		SELECT PROFILE_NO 
+				,REVIEW_COUNT 
+				,REVIEW_AVERAGE 
+				,SUB_SERVICE
+				,ONELINE_INTRO 
+				,APPROVE_YN 
+				,PHONE_AVAILABLE 
+				,SERVICE_DETAIL_CONTENT 
+		FROM PROFILE 
+		JOIN MEMBER USING(USER_NO)
+		WHERE USER_NO = #{userNo}
+		
+	</select>
   </mapper>

@@ -39,12 +39,11 @@
 	            	</c:forEach>
 	            </div>
 	        </div>
-	        <div class="transferBtn">
+	      <div class="transferBtn">
 	            <a class="btn" href="${backPage }">이전</a>
 	            <button type="submit"class="btn">다음</button>
 	        </div>
         </form>
-		    </div>
 		    <!-- Button trigger modal -->
 		<button type="button" id="hiddenModalBtn"class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"></button>
 		
@@ -67,7 +66,7 @@
 		      </div>
 		    </div>
 		  </div>
-		</div>
+		</div> 
 		
 		<script>
 		  $(function(){
@@ -77,7 +76,7 @@
 		</script>
     <input type="text"id="hiddenCurrentPage" class="hiddenNum" value="${currentPage}"></input>
     <script src="${contextPath }/resources/js/announcement.js"></script>
-    
+   </div>
 </body>
 
 </html>

@@ -1,4 +1,28 @@
-//질문 답변 박스 보여주기 함수
+
+
+$(function(){
+    $("[class$='-hidden-workBox']").hide();
+    
+    
+});
+//프로필 정보 조회
+/*
+function selectAllProfileInfo(){
+
+    $.ajax({
+    	url : "selectAllProfileInfo.pr",
+    	data : {userNo: $("#userNo").val()},
+    	success : function(result){
+    		
+    		resolve(result);
+    	}
+    	
+    });
+}
+*/
+
+
+//질문 답변 수정하기
 function showAnswerBox(){
     document.querySelector("#questionSaveBtn").style.display = 'block';
     document.querySelector("#questionEnrollBtn").style.display = 'none';
@@ -8,19 +32,43 @@ function showAnswerBox(){
         answerBox[i].style.display = 'block';
     }
 }
-//고수 상세 설명 함수
+//고수 상세 설명 수정하기
 function showDetailServiceBox(){
     document.querySelector("#detailServiceSaveBtn").style.display = 'block';
     document.querySelector("#detailServiceEditBtn").style.display = 'none';
-    document.getElementById("detailDescription").style.display = 'block';
+    $("#detail-description-result").hide();
+    $(".detail-hidden-workBox").show();
+}
+//띱 활동명 수정하기
+function editNickName(){
+    document.querySelector("#saveNickName").style.display = 'block';
+    document.querySelector("#editNickName").style.display = 'none';
+    $("#nickname-result").hide();
+    $(".nickname-hidden-workBox").show();
+}
+//띱 활동명 저장하기
+function saveNickName(){
+    document.querySelector("#saveNickName").style.display = 'none';
+    document.querySelector("#editNickName").style.display = 'block';
+    $("#nickname-result").show();
+    $(".nickname-hidden-workBox").hide();
+    $.ajax({
+        url: "changeNickName.pr",
+        data: {"changedNickname": $("#nickname-box").val(),
+        	   "userNo": $("#userNo").val() },
+        success : function(result){
+        	$.ajax({
+        		url : "memberSessionReinsert.me",
+        		data : {"email": $("#email").val()},
+        		success : function(member){
+	        		$("#nickname-result").text(member.userNickName);
+        		}
+        	});
+        },
+        error: function(){
+            console.log('닉네임 업데이트 실패');
+        }
+    });
+    
 }
 
-//수정하기, 저장하기 버튼 display 활성화 비활성화 함수
-var saveBtns = document.querySelectorAll(".saveBtn");
-saveBtns.forEach(function(saveBtn){
-    saveBtn.addEventListener('click',function(){
-        saveBtn.style.display = 'none';
-        var editBtn = saveBtn.previousElementSibling;
-        editBtn.style.display = 'block';
-    });
-});

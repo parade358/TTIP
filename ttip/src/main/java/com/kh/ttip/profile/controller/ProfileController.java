@@ -6,18 +6,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.ttip.profile.model.service.ProfileService;
 import com.kh.ttip.profile.model.vo.Image;
+import com.kh.ttip.profile.model.vo.Profile;
 
 @Controller
 public class ProfileController {
@@ -31,7 +36,7 @@ public class ProfileController {
 		return "profile/profileMainPage";
 	}
 	@PostMapping("uploadImages.pr")
-	public void uploadImages(@RequestParam("files")MultipartFile[] formData, HttpSession session) {
+	public String uploadImages(@RequestParam("files")MultipartFile[] formData, HttpSession session) {
 		
 		
 		//매개변수로 주입받는 객체의 경우는 생성이 되어 넘어오기대문에
@@ -62,17 +67,67 @@ public class ProfileController {
 			//데이터베이스에 정보 등록하기.
 			int result = service.uploadImages(map);
 			
-			System.out.println(result);
-			
-			
-//			if(result>0) {
-//				session.setAttribute("alertMsg", "게시글 등록 성공");
-//				return "redirect:/list.bo";
-//			}else {
-//				session.setAttribute("alertMsg", "게시글 등록 실패");
-//				return "common/errorPage";
-//			}
+			if(result>0) {
+				session.setAttribute("alertMsg", "게시글 등록 성공");
+				return "redirect:/selectDetailImage.pr";
+			}else {
+				session.setAttribute("alertMsg", "게시글 등록 실패");
+				return "common/errorPage";
+			}
 				
+	}
+	@RequestMapping("selectDetailImage.pr")
+	public String selectDetailImages(HttpSession session,ModelAndView mv) {
+		
+//		int userNo = session.getAttribute("loginUser").getUserNo();
+		int userNo = 12;
+		ArrayList<Image> list = service.selectDetailImages(userNo);
+		
+		if(list!=null) {
+			mv.addObject(list);
+		}else {
+			return "common/errorPage";
+		}
+		return "profile/profileMainPage";
+	}
+	@ResponseBody
+	@RequestMapping("changeNickName.pr")
+	public int updateNickname(String changedNickname,
+							 String userNo) {
+		
+		HashMap<String,String> map = new HashMap<>();
+		map.put("changedNickname", changedNickname);
+		map.put("userNo", userNo);
+		int result = service.updateNickname(map);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertSubCategory.pr")
+	public int insertSubCategory(@RequestParam(value="userNo") int userNo,
+								@RequestParam(value="checkedCategory[]") String[] checkedCategory) {
+		
+		StringJoiner joiner = new StringJoiner(",");
+		for(String category : checkedCategory) {
+			joiner.add(category);
+		}
+		String realCheckedCategory = joiner.toString();
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("userNo", userNo);
+		map.put("realCheckedCategory", realCheckedCategory);
+		
+		int result = service.insertSubCategory(map);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectAllProfileInfo.pr")
+	public Profile selectAllProfileInfo(int userNo) {
+		
+		Profile profile = service.selectAllProfileInfo(userNo);
+		
+		return profile;
 	}
 	//파일명 수정 모듈
 		public String saveFile(MultipartFile upfile
@@ -107,5 +162,12 @@ public class ProfileController {
 			
 			
 			return changeName;
+		}
+		
+		@GetMapping("getCurrentPage.pr")
+		public String getCurrentPage(int currentPage,ModelAndView mv) {
+			
+			mv.addObject("currentPage",currentPage);
+			return "profile/profileMainPage";
 		}
 }

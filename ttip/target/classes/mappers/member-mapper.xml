@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="memberMapper">
+  		<resultMap type="member" id="memberResultSet">
+  			<result column="USER_NO" property="userNo"/>
+  			<result column="EMAIL" property="email"/>
+  			<result column="USER_PASSWORD" property="userPassword"/>
+  			<result column="USER_NICKNAME" property="userNickName"/>
+  			<result column="USER_NAME" property="userName"/>
+  			<result column="PHONE" property="phone"/>
+  			<result column="ENROLLDATE" property="enrollDate"/>
+  			<result column="GENDER" property="gender"/>
+  			<result column="ADDRESS" property="address"/>
+  			<result column="IMAGES" property="images"/>
+  			<result column="CATEGORY_NO" property="categoryNo"/>
+  			<result column="USER_POINT" property="userPoint"/>
+  			<result column="STATUS" property="status"/>
+  		</resultMap>
+  		
+  		
+		<!-- 회원가입 -->
+  		<insert id="insertMember" parameterType="member">
+	  		INSERT INTO MEMBER ( 
+	  		         USER_NO
+	                ,EMAIL
+	                ,USER_PASSWORD
+	                ,USER_NICKNAME
+	                ,ADDRESS
+	                ,CATEGORY_NO)
+			VALUES (
+	               SEQ_MNO.NEXTVAL
+	              ,#{email}
+	        	  ,#{userPassword}
+	        	  ,#{userNickName}
+	        	  ,#{address}
+	              ,#{categoryNo}
+			)
+  		</insert>
+  		
+  		
+  		<!-- 로그인 -->
+  		<select id="loginMember" parameterType="member" resultMap="memberResultSet">
+  			SELECT 
+		        USER_NO,
+		        EMAIL,
+		        USER_PASSWORD,
+		        USER_NICKNAME,
+		        USER_NAME,
+		        PHONE,
+		        ENROLLDATE,
+		        GENDER,
+		        ADDRESS,
+		        IMAGES,
+		        CATEGORY_NO,
+		        USER_POINT,
+		        STATUS
+		    FROM MEMBER
+		    WHERE EMAIL = #{email}
+		    AND STATUS ='Y'
+  		</select>
+  		
+  		
+  		<!-- 별명 중복체크 -->
+  		<select id="nickname" resultType="_int" parameterType="string">
+  			SELECT count(*)
+			FROM MEMBER 
+			WHERE USER_NICKNAME= #{userNickname}
+  		</select>
+  		
+  		<!-- 이메일 중복체크 -->
+  		<select id="emailck" resultType="_int" parameterType="string">
+  			SELECT count(*)
+			FROM MEMBER 
+			WHERE EMAIL= #{email}
+  		</select>
+  		
+  
+  </mapper>

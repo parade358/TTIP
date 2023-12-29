@@ -58,7 +58,7 @@ public class MemberController {
 		// 실패시 에러페이지로 (model에 에러메세지 담기)
 
 		int result = memberService.insertMember(m);
-
+		
 		if (result > 0) { // 성공
 			session.setAttribute("alertMsg", "회원가입 성공");
 
@@ -93,6 +93,18 @@ public class MemberController {
 		}
 
 		return mv;
+	}
+	//회원정보 재조회
+	@ResponseBody
+	@RequestMapping("memberSessionReinsert.me")
+	public Member memberSessionReinsert(String email, HttpSession session, ModelAndView mv) {
+
+		Member loginUser = memberService.memberSessionReinsert(email);
+		
+		session.setAttribute("loginUser", loginUser);
+		
+		return loginUser;
+
 	}
 
 	// 지역 선택

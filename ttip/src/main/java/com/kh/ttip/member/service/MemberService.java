@@ -15,6 +15,9 @@ public interface MemberService {
 
 	//이메일 중복체크
 	int EmailSend(String emailck);
+	
+	//회원정보 재조회
+	Member memberSessionReinsert(String email);
 
 	int findPwdCheck(String email);
 
