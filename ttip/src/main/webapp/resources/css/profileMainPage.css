@@ -169,8 +169,8 @@ div{
   display: none;
  }
 .bannerContainer{
-  position: sticky;
-  top: 0px;
+  position: fixed;
+  top: 75px;
   height: 80vh;
 }
 .bannerAndInfoContainer{
@@ -244,12 +244,44 @@ swiper-slide img {
   width: 100%;
   height: 60%;
   grid-template-columns: 1fr 1fr;
-  justify-content: space-evenly;
-  row-gap: 10px;
+  justify-content: space-between;
+  row-gap: 20px;
 }
 .exchangedMember{
   border: 1px solid lightgray;
   border-radius: 10px;
   width: 60%;
-  margin-left: 30px;
+  margin: 0px;
+}
+.exchangedMember:nth-child(odd){
+	margin-left: 45px;
+	margin-right: 5px;
+}
+.exchangedMember:nth-child(even){
+	margin-right: 30px;
+	margin-left: 10px;
+	
+}
+.nickname-hidden-workBox{
+	
+  width: 100%;
+  grid-column: span 2;
+}
+#nickname-box{
+width: 100%;
+box-sizing: border-box;
+  height: 50px;
+  border-radius: 4px;
+}
+.maximumtextBox{
+  display: flex;
+  justify-content: end;
+  grid-column: span 2;
+}
+#currNumberOfNickname{
+  color: #7752FE;
+  font-weight: bold;
+}
+#maxNumText{
+  font-size: 0.875rem;
 }

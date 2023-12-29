@@ -7,31 +7,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="${contextPath }/resources/css/profileMainPage.css">
-    <link rel="stylesheet" href="${contextPath }/resources/css/fileUpload.css">
-    <!-- contextPath -->
-	<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
-	
-	<!-- 이전 페이지 referer -->
-	<c:set var="backPage" value='<%=request.getHeader("referer")%>'/> 
-    <!-- 기본 라이브러리 -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- 부트스트랩 연결 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-   
-    <!-- 구글 폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <link rel="stylesheet" href="${contextPath }/resources/css/profileMainPage.css">
+    <link rel="stylesheet" href="${contextPath }/resources/css/fileUpload.css">
+    <link rel="stylesheet" href="${contextPath }/resources/css/categoryModal.css">
+    
 </head>
 <body>
+
     <div class="allPage">
         <div class="all-container">
             <div class="bannerAndInfoContainer">
@@ -80,29 +69,35 @@
                     </div>
                     
                     <hr>
-                    <div class="item">
+                     <div class="item">
                         <h2>띱 활동명</h2>
                         <div class="edit">
-                            <button class="editBtn">수정</button>
-                            <button class="saveBtn">저장</button>
+                            <button class="editBtn" id="editNickName" onclick="editNickName();">수정</button>
+                            <button class="saveBtn" id="saveNickName"
+                            onclick="saveNickName();">저장</button>
                         </div>
-                        <div class="workBox">권예찬</div>
-                    </div>
+                        <div class="workBox" id="workBox2">
+                        	<div id="nickname-result">${loginUser.userNickName }</div>
+	                        <div class="nickname-hidden-workBox">
+		                        <input type="text" maxlength="30" id="nickname-box">
+		                        <div class="maximumtextBox"><p id="maxNumText"><span id="currNumberOfNickname"></span>/30자</p></div>
+	                        </div>
+                        </div>
+                    </div> 
                     <hr>
                     <div class="item">
                         <h2>대표서비스</h2>
-                        <div class="edit"><button type="button"class="editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">수정</button></div>
+                        <div class="edit"><button type="button"class="editBtn" >수정</button></div>
                         <div class="workBox">영어과외</div>
                     </div>
                     <hr>
                     <div class="item">
                         <h2>제공 서비스</h2>
-                        <div class="edit"><button class="editBtn" onclick="editCategory();">수정</button></div>
+                        <div class="edit"><button type="button" class="editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" >수정</button></div>
                         <div class="workBox">
                             <div class="categery-container">
                                 <div class="category-box">+ 서비스 추가</div>
-                                <div class="category-box">수학 과외</div>
-                                <div class="category-box">영어 과외</div>
+                                
                             </div>
                         </div>
                     </div>
@@ -114,6 +109,7 @@
                             <button class="saveBtn">저장</button>
                         </div>
                         <div class="workBox">고수의 수학 과외, 영어 과외 서비스</div>
+                        <div class="one-line-introduce-hidden-workBox"></div>
                     </div>
                     <hr>
                     <div class="item">
@@ -132,7 +128,9 @@
                             <button class="saveBtn">저장</button>
                         </div>
                         <div class="workBox">
-                            <div class="selectTime">
+                        	<div id="time-selected"></div>
+                        	<div class="time-select-hidden-workBox">
+                        		<div class="selectTime">
                                 <div class="startTime time-select-box">
                                     <select class="form-select" aria-label="Default select example">
                                         <option value></option>
@@ -195,6 +193,7 @@
                                 <span>까지</span>
                             </div>
                         </div>
+                       </div>
                     </div>
                     <hr> 
                     <div class="item">
@@ -213,7 +212,10 @@
                             <button class="saveBtn" id="detailServiceSaveBtn">저장</button>
                         </div>
                         <div class="workBox">
-                            <textarea class="detailDescription" id="detailDescription"rows="6"placeholder="다른 사용자가 가장 꼼꼼히 보는 공간입니다. 회원님의 장점과 함께 서비스 특징, 서비스 제공 방법, 준비 사항을 자세히 적어주세요!"></textarea>
+                        	<div id="detail-description-result"></div>
+                        	<div class="detail-description-hidden-workBox">
+                            	<textarea class="detailDescription" id="detailDescription"rows="6"placeholder="다른 사용자가 가장 꼼꼼히 보는 공간입니다. 회원님의 장점과 함께 서비스 특징, 서비스 제공 방법, 준비 사항을 자세히 적어주세요!"></textarea>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -318,10 +320,10 @@
                                 <h2>리뷰를 남겨보아요!</h2>
                            </div>
                            <div class="reviewMember">
-                                <div class="exchangedMember">프로필</div>
-                                <div class="exchangedMember">프로필</div>
-                                <div class="exchangedMember">프로필</div>
-                                <div class="exchangedMember">프로필</div>
+                                <div class="exchangedMember">프로필1</div>
+                                <div class="exchangedMember">프로필2</div>
+                                <div class="exchangedMember">프로필3</div>
+                                <div class="exchangedMember">프로필4</div>
                            </div>
                         </div>
                     </div>
@@ -337,26 +339,26 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">어떤 서비스를 제공할 수 있나요?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="category">
-                        <c:forEach var="list" items="${list }">
-                            <div class="main-category">
-                                <label class="container">${list.categoryName }
-                                    <input type="checkbox" name="checkedCategory" value="${list.categoryNo }">
-                                    <span class="checkmark"></span>
-                                </label> 
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit"class="btn">다음</button>
-                </div>
-            </div>
+                <div id="selectDetailCategoryId" class="mainCategoryWrap">
+	                <div class="modal-body">
+					        <div class="wrap" id="main-category-list">
+					            <div class="category" id="mainCategoryBoxId">
+					            </div>
+					        </div>
+					        <div class="wrap2" id="detail-category-list">
+					            <div class="category" id="detailCategoryBoxId">
+					            </div>
+					        </div>
+			                <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" onclick="selectMainCategory();">이전</button>
+			                <button type="button"class="btn" id="selectDetailCateBtn"onclick="selectDetailCategory();">다음</button>
+			                <button type="button" class="btn" id="selectDetailCateBtn2"onclick="insertDetailCategory();" style="display:none">다음</button>
+			              </div>
+	            	</div>
+		        </div>
             </div>
         </div>
-    
+    </div>
     <!-- 사진 및 동영상 모달 -->
     <div class="modal fade" id="uploadPicture" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -367,7 +369,7 @@
             </div>
             <div class="modal-body">
                 <main class="app">
-                    <div class="header">
+                    <div class="upload-header">
                         <h2>사진 업로드</h2>
                         <div class="server-message"></div>
                     </div>
@@ -378,7 +380,7 @@
                     </div>
             
                     <form action="" id="saved-form">
-                        <div class="header">
+                        <div class="upload-header">
                             <h3>업로드된 사진</h3>
                             <button type="submit">Delete</button>
                         </div>
@@ -386,7 +388,7 @@
                     </form>
             
                     <form action="" id="queued-form">
-                        <div class="header">
+                        <div class="upload-header">
                             <h3>업로드될 사진</h3>
                             <button type="submit">Upload</button>
                         </div>
@@ -401,10 +403,109 @@
         </div>
         </div>
     </div>
+    <input type="hidden" id="userNo" value="${loginUser.userNo }">
+    <input type="hidden" id="email" value="${loginUser.email }">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script src="${contextPath }/resources/js/profileMainPage.js"></script>
     <script src="${contextPath }/resources/js/fileUpload.js"></script>
     <script src="${contextPath }/resources/js/banner.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script>
+    
+    	$(function(){
+    		
+    		$.ajax({
+    			url: "selectMainCategoryModal.an",
+    			data: {currentPage:1},
+    			success: function(map) {
+    				console.log(map.list);
+    				var list = map.list
+    				var str = "";
+    				
+    				for(var i in list){
+    					str +=  "<div class='main-category'>"      
+								      +"<label class='container'>"+list[i].categoryName+""          
+								      +" <input type='checkbox' name='checkedCategory' value="+list[i].categoryNo+">"              
+								      +"<span class='checkmark'></span>"              
+						      		  +"</label>"          
+						      	+"</div>"      
+    				}
+					$("#mainCategoryBoxId").html(str); 
+					$("#detail-category-list").css("display",'none');
+    			}
+    		});
+    	});
+    	function selectDetailCategory(){
+    		$("#main-category-list").css("display",'none'); 
+    		$("#detail-category-list").css("display",'block');
+    		$("#selectDetailCateBtn").css("display",'none');
+    		$("#selectDetailCateBtn2").css("display",'block');
+    		var checkedCategoryArray = [];
+    		$("input[name='checkedCategory']:checked").each(function(){
+    			 checkedCategoryArray.push(parseInt($(this).val(), 10));
+    		})
+			 $.ajax({
+				url: "selectDetailCategoryModal.an",
+				data: {"checkedCategory": checkedCategoryArray},
+				success: function(list){
+					var str = "";
+    				for(var i in list){
+    					str +=  "<div class='main-category'>"      
+								      +"<label class='container'>"+list[i].detailName+""          
+								      +" <input type='checkbox' name='detailCheckedCategory' value='"+list[i].detailName+"'>"              
+								      +"<span class='checkmark'></span>"              
+						      		  +"</label>"          
+						      	+"</div>"      
+    				}
+    				$("#detailCategoryBoxId").html(str);
+    				
+				}
+			});
+		}
+    </script>
+    <script>
+    
+    	function insertDetailCategory(){
+    		
+    		var checkedCategory = [];
+    	    $("input[name='detailCheckedCategory']:checked").each(function(){
+    	    	checkedCategory.push($(this).val());
+    	    });
+    		$.ajax({
+    			url : "insertSubCategory.pr",
+    			data : {
+    				checkedCategory: checkedCategory,
+    				userNo: $("#userNo").val()
+    			},
+    			success : function(data){
+    				console.log('카테고리 리스트',data);
+    				
+    				$.ajax({
+    			    	url : "selectAllProfileInfo.pr",
+    			    	data : {userNo: $("#userNo").val()},
+    			    	success : function(result){
+    			    		
+    			    		console.log('result: ',result);
+    			    		var subServiceString = result.subService;
+    			    		var categoryArray = subServiceString.split(','); 
+    			    		var str = "";
+    			    		for(var i in categoryArray){
+    			    			str += "<div class='category-box'>"+categoryArray[i]+"</div>"
+    			    		}
+    			    		$(".categery-container").append(str);
+    			    	}
+    			    	
+    			    });
+    			}
+    		});
+    	}
+    </script>
+    <script>
+        $("#nickname-box").keyup(function(){
+           $("#currNumberOfNickname").text($(this).val().length);
+        });
+    </script>
+    
+    <script src="${contextPath }/resources/js/announcement.js"></script>
 </body>
 </html>

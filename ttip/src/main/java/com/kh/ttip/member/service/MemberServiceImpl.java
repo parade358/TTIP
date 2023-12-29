@@ -39,6 +39,11 @@ public class MemberServiceImpl implements MemberService {
 	public int EmailSend(String emailck) {
 		return memberDao.EmailSend(sqlSession, emailck);
 	}
+
+	@Override
+	public Member memberSessionReinsert(String email) {
+		return memberDao.memberSessionReinsert(email,sqlSession);
+	}
 	
 	
 }

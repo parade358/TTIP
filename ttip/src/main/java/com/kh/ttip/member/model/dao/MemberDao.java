@@ -26,4 +26,8 @@ public class MemberDao {
 	public int EmailSend(SqlSessionTemplate sqlSession, String emailck) {
 		return sqlSession.selectOne("memberMapper.emailck", emailck);
 	}
+
+	public Member memberSessionReinsert(String email, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.loginMember", email);
+	}
 }

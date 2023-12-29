@@ -6,11 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.ttip.profile.model.service.ProfileService;
 import com.kh.ttip.profile.model.vo.Image;
+import com.kh.ttip.profile.model.vo.Profile;
 
 @Controller
 public class ProfileController {
@@ -87,6 +90,45 @@ public class ProfileController {
 		}
 		return "profile/profileMainPage";
 	}
+	@ResponseBody
+	@RequestMapping("changeNickName.pr")
+	public int updateNickname(String changedNickname,
+							 String userNo) {
+		
+		HashMap<String,String> map = new HashMap<>();
+		map.put("changedNickname", changedNickname);
+		map.put("userNo", userNo);
+		int result = service.updateNickname(map);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertSubCategory.pr")
+	public int insertSubCategory(@RequestParam(value="userNo") int userNo,
+								@RequestParam(value="checkedCategory[]") String[] checkedCategory) {
+		
+		StringJoiner joiner = new StringJoiner(",");
+		for(String category : checkedCategory) {
+			joiner.add(category);
+		}
+		String realCheckedCategory = joiner.toString();
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("userNo", userNo);
+		map.put("realCheckedCategory", realCheckedCategory);
+		
+		int result = service.insertSubCategory(map);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectAllProfileInfo.pr")
+	public Profile selectAllProfileInfo(int userNo) {
+		
+		Profile profile = service.selectAllProfileInfo(userNo);
+		
+		return profile;
+	}
 	//파일명 수정 모듈
 		public String saveFile(MultipartFile upfile
 							  ,HttpSession session) {
@@ -120,5 +162,12 @@ public class ProfileController {
 			
 			
 			return changeName;
+		}
+		
+		@GetMapping("getCurrentPage.pr")
+		public String getCurrentPage(int currentPage,ModelAndView mv) {
+			
+			mv.addObject("currentPage",currentPage);
+			return "profile/profileMainPage";
 		}
 }
