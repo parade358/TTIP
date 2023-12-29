@@ -24,6 +24,8 @@
     <!-- CSS 파일 -->
     <link rel="stylesheet" href="${contextPath }/resources/css/header.css">
 	<link rel="stylesheet" href="${contextPath }/resources/css/footer.css">
+	<!-- font-awesome -->
+	<script src="https://kit.fontawesome.com/28c3f049d0.js" crossorigin="anonymous"></script>
 	
 	 <style>
 	    .searchBar {

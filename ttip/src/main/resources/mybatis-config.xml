@@ -24,6 +24,7 @@
 			<typeAlias type="com.kh.ttip.profile.model.vo.Image" alias="image"/>
 			<typeAlias type="com.kh.ttip.profile.model.vo.Profile" alias="profile"/>
 			<typeAlias type="com.kh.ttip.javamaster.model.vo.MessageModel" alias="chat"/>
+			<typeAlias type="com.kh.ttip.profile.model.vo.QA_comment" alias="QA_comment"/>
 		</typeAliases>
 		
 	</configuration>

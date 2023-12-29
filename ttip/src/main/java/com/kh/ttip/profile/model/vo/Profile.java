@@ -19,7 +19,8 @@ public class Profile {
 	private String subService;
 	private String oneLineIntro;
 	private String approveYN;
-	private Date phoneAvailable;
+	private String phoneAvailable;
 	private String serviceDetailContent;
-	
+	private String changeName;
+	private String mainService;
 }

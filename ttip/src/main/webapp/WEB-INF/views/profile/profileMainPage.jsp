@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <link rel="stylesheet" href="${contextPath }/resources/css/profileMainPage.css">
-    <link rel="stylesheet" href="${contextPath }/resources/css/fileUpload.css">
-    <link rel="stylesheet" href="${contextPath }/resources/css/categoryModal.css">
+    <link rel="stylesheet" href="${contextPath }/resources/css/profile/profileMainPage.css">
+    <link rel="stylesheet" href="${contextPath }/resources/css/profile/fileUpload.css">
+    <link rel="stylesheet" href="${contextPath }/resources/css/profile/categoryModal.css">
+    <link rel="stylesheet" href="${contextPath }/resources/css/profile/profilePicture.css">
     
 </head>
 <body>
@@ -33,9 +34,13 @@
                         </div>
                         <div class="workBox">
                             <div class="profileContainer">
-                                <div class="profileImg">
-                                    
-                                </div>
+							     <div class="upload">
+							        <img src="https://i.pinimg.com/564x/88/3d/74/883d74b5eca63acc4e07773f3a645ba6.jpg" id="finalProfilePictureId"alt="" width="100" height="100">
+							        <div class="round">
+							            <button type="button"id="openProfilePictureModal" data-bs-toggle="modal" data-bs-target="#profilePictureUploadModal"></button>
+							            <i class="fa-solid fa-camera" style="color: #fff;"></i>
+							        </div>
+							    </div>
                                 <div class="profileDetailInfo">
                                     <div class="profileDetail-1">
                                         <ul class="reviewData">
@@ -80,24 +85,26 @@
                         	<div id="nickname-result">${loginUser.userNickName }</div>
 	                        <div class="nickname-hidden-workBox">
 		                        <input type="text" maxlength="30" id="nickname-box">
-		                        <div class="maximumtextBox"><p id="maxNumText"><span id="currNumberOfNickname"></span>/30자</p></div>
+		                        <div class="maximumtextBox"><p  class="maxNumText"><span class="currNumber"id="currNumberOfNickname"></span>/30자</p></div>
 	                        </div>
                         </div>
                     </div> 
                     <hr>
                     <div class="item">
                         <h2>대표서비스</h2>
-                        <div class="edit"><button type="button"class="editBtn" >수정</button></div>
-                        <div class="workBox">영어과외</div>
+                        <div class="edit"><button type="button"class="editBtn" data-bs-toggle="modal" data-bs-target="#mainCategoryModal">수정</button></div>
+                        <div class="workBox">
+                        	<div class="categery-container" id="mainCategoryContainerBox">
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <div class="item">
                         <h2>제공 서비스</h2>
-                        <div class="edit"><button type="button" class="editBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" >수정</button></div>
+                        <div class="edit"><button type="button" class="editBtn" data-bs-toggle="modal" data-bs-target="#detailCategoryModal" >수정</button></div>
                         <div class="workBox">
-                            <div class="categery-container">
-                                <div class="category-box">+ 서비스 추가</div>
-                                
+                            <div class="categery-container" id="categoryContainerBox">
+                                <div class="category-box" id="serviceAdd">+ 서비스 추가</div>
                             </div>
                         </div>
                     </div>
@@ -105,89 +112,94 @@
                     <div class="item">
                         <h2>한줄소개</h2>
                         <div class="edit">
-                            <button class="editBtn">수정</button>
-                            <button class="saveBtn">저장</button>
+                            <button class="editBtn" id="editOneLineBtn">수정</button>
+                            <button class="saveBtn" id="saveOneLineBtn">저장</button>
                         </div>
-                        <div class="workBox">고수의 수학 과외, 영어 과외 서비스</div>
-                        <div class="one-line-introduce-hidden-workBox"></div>
+                        <div class="workBox">
+                        	<div id="introduce-result"></div>
+	                        <div class="one-line-introduce-hidden-workBox">
+	                        	<textarea maxlength="80"id="oneLineTextArea" class="profileTextArea"></textarea>
+			                    <div class="maximumtextBox"><p class="maxNumText" ><span class="currNumber"id="currNumberOfOneLine"></span>/80자</p></div>
+	                        </div>
+                        </div>
                     </div>
                     <hr>
                     <div class="item">
                         <h2>활동 지역</h2>
                         <div class="edit">
-                            <button class="editBtn">수정</button>
-                            <button class="saveBtn">저장</button>
+                            <button class="editBtn" id="editAreaBtn"onclick="sample6_execDaumPostcode();">수정</button>
+                            <button class="saveBtn" id="saveAreaBtn">저장</button>
                         </div>
-                        <div class="workBox">서울특별시 강남구 강남대로 지하 396</div>
+                        <div class="workBox" id="sample6_address"></div>
                     </div>
                     <hr>
                     <div class="item">
                         <h2>연락 가능 시간</h2>
                         <div class="edit">
-                            <button class="editBtn">수정</button>
-                            <button class="saveBtn">저장</button>
+                            <button class="editBtn" id="editTimeBtn">수정</button>
+                            <button class="saveBtn" id="saveTimeBtn">저장</button>
                         </div>
                         <div class="workBox">
-                        	<div id="time-selected"></div>
-                        	<div class="time-select-hidden-workBox">
+                        	<div id="time-selected-result"></div>
+                        	<div class="time-select-hidden-workBox" >
                         		<div class="selectTime">
                                 <div class="startTime time-select-box">
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" id="startTime"aria-label="Default select example">
                                         <option value></option>
-                                        <option value="1">오전 12시</option>
-                                        <option value="2">오전 1시</option>
-                                        <option value="3">오전 2시</option>
-                                        <option value="3">오전 3시</option>
-                                        <option value="3">오전 4시</option>
-                                        <option value="3">오전 5시</option>
-                                        <option value="3">오전 6시</option>
-                                        <option value="3">오전 7시</option>
-                                        <option value="3">오전 8시</option>
-                                        <option value="3" selected>오전 9시</option>
-                                        <option value="3">오전 10시</option>
-                                        <option value="3">오전 11시</option>
-                                        <option value="3">오전 12시</option>
-                                        <option value="2">오후 1시</option>
-                                        <option value="3">오후 2시</option>
-                                        <option value="3">오후 3시</option>
-                                        <option value="3">오후 4시</option>
-                                        <option value="3">오후 5시</option>
-                                        <option value="3">오후 6시</option>
-                                        <option value="3">오후 7시</option>
-                                        <option value="3">오후 8시</option>
-                                        <option value="3">오후 9시</option>
-                                        <option value="3">오후 10시</option>
-                                        <option value="3">오후 11시</option>
+                                        <option value="오전 12시">오전 12시</option>
+                                        <option value="오전 1시">오전 1시</option>
+                                        <option value="오전 2시">오전 2시</option>
+                                        <option value="오전 3시">오전 3시</option>
+                                        <option value="오전 4시">오전 4시</option>
+                                        <option value="오전 5시">오전 5시</option>
+                                        <option value="오전 6시">오전 6시</option>
+                                        <option value="오전 7시">오전 7시</option>
+                                        <option value="오전 8시">오전 8시</option>
+                                        <option value="오전 9시" selected>오전 9시</option>
+                                        <option value="오전 10시">오전 10시</option>
+                                        <option value="오전 11시">오전 11시</option>
+                                        <option value="오전 12시">오전 12시</option>
+                                        <option value="오후 1시">오후 1시</option>
+                                        <option value="오후 2시">오후 2시</option>
+                                        <option value="오후 3시">오후 3시</option>
+                                        <option value="오후 4시">오후 4시</option>
+                                        <option value="오후 5시">오후 5시</option>
+                                        <option value="오후 6시">오후 6시</option>
+                                        <option value="오후 7시">오후 7시</option>
+                                        <option value="오후 8시">오후 8시</option>
+                                        <option value="오후 9시">오후 9시</option>
+                                        <option value="오후 10시">오후 10시</option>
+                                        <option value="오후 11시">오후 11시</option>
                                     </select>
                                 </div>
                                 <span>부터</span>
                                 <div class="endTime time-select-box">
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" id="endTime"aria-label="Default select example">
                                         <option value></option>
-                                        <option value="1">오전 12시</option>
-                                        <option value="2">오전 1시</option>
-                                        <option value="3">오전 2시</option>
-                                        <option value="3">오전 3시</option>
-                                        <option value="3">오전 4시</option>
-                                        <option value="3">오전 5시</option>
-                                        <option value="3">오전 6시</option>
-                                        <option value="3">오전 7시</option>
-                                        <option value="3">오전 8시</option>
-                                        <option value="3">오전 9시</option>
-                                        <option value="3">오전 10시</option>
-                                        <option value="3">오전 11시</option>
-                                        <option value="3">오전 12시</option>
-                                        <option value="2">오후 1시</option>
-                                        <option value="3">오후 2시</option>
-                                        <option value="3">오후 3시</option>
-                                        <option value="3">오후 4시</option>
-                                        <option value="3">오후 5시</option>
-                                        <option value="3"selected>오후 6시</option>
-                                        <option value="3">오후 7시</option>
-                                        <option value="3">오후 8시</option>
-                                        <option value="3">오후 9시</option>
-                                        <option value="3">오후 10시</option>
-                                        <option value="3">오후 11시</option>
+                                        <option value="오전 12시">오전 12시</option>
+                                        <option value="오전 1시">오전 1시</option>
+                                        <option value="오전 2시">오전 2시</option>
+                                        <option value="오전 3시">오전 3시</option>
+                                        <option value="오전 4시">오전 4시</option>
+                                        <option value="오전 5시">오전 5시</option>
+                                        <option value="오전 6시">오전 6시</option>
+                                        <option value="오전 7시">오전 7시</option>
+                                        <option value="오전 8시">오전 8시</option>
+                                        <option value="오전 9시">오전 9시</option>
+                                        <option value="오전 10시">오전 10시</option>
+                                        <option value="오전 11시">오전 11시</option>
+                                        <option value="오전 12시">오전 12시</option>
+                                        <option value="오후 1시">오후 1시</option>
+                                        <option value="오후 2시">오후 2시</option>
+                                        <option value="오후 3시">오후 3시</option>
+                                        <option value="오후 4시">오후 4시</option>
+                                        <option value="오후 5시">오후 5시</option>
+                                        <option value="오후 6시"selected>오후 6시</option>
+                                        <option value="오후 7시">오후 7시</option>
+                                        <option value="오후 8시">오후 8시</option>
+                                        <option value="오후 9시">오후 9시</option>
+                                        <option value="오후 10시">오후 10시</option>
+                                        <option value="오후 11시">오후 11시</option>
                                     </select>
                                 </div>
                                 <span>까지</span>
@@ -208,14 +220,27 @@
                     <div class="item">
                         <h2>고수 서비스 상세설명</h2>
                         <div class="edit">
-                            <button class="editBtn" id="detailServiceEditBtn" onclick="showDetailServiceBox();">수정</button>
-                            <button class="saveBtn" id="detailServiceSaveBtn">저장</button>
+                            <button class="editBtn" id="editDetailServiceBtn">수정</button>
+                            <button class="saveBtn" id="saveDetailServiceBtn" onclick="return detailDescripFunctions();">저장</button>
                         </div>
                         <div class="workBox">
                         	<div id="detail-description-result"></div>
-                        	<div class="detail-description-hidden-workBox">
-                            	<textarea class="detailDescription" id="detailDescription"rows="6"placeholder="다른 사용자가 가장 꼼꼼히 보는 공간입니다. 회원님의 장점과 함께 서비스 특징, 서비스 제공 방법, 준비 사항을 자세히 적어주세요!"></textarea>
-                            </div>
+	                        <div class="detail-description-hidden-workBox">
+	                        	<textarea maxlength="5000"id="detailDescriptionTextArea" class="profileTextArea"></textarea>
+			                    <div class="maximumtextBox">
+			                    	<div class="maxiMumTextItem">
+				                   		<div id="minNumAlertMsg" style="display:none;">30자 이상 입력해주세요.</div>
+			                    	</div>
+			                    	<div class="maxiMumTextItem">
+				                   		<div id="minNum30">
+					                    	<p class="maxNumText" id="detailDescMinTextNum">
+					                    		최소 30자
+					                    	</p>
+					                    	<i class="fa-solid fa-check" id="checkIcon"></i>
+				                    	</div>
+			                    	</div>
+			                    </div>
+	                        </div>
                         </div>
                     </div>
                     <hr>
@@ -234,7 +259,8 @@
                             <button class="editBtn" data-bs-toggle="modal" data-bs-target="#uploadPicture">수정</button>
                             <button class="saveBtn">저장</button>
                         </div>
-                        <div class="workBox">
+                        <div class="workBox" id="imageVideoContainer">
+                        	
                         </div>
                     </div>
                     <hr>
@@ -244,27 +270,56 @@
                             <button class="editBtn" id="questionEnrollBtn" onclick="showAnswerBox();">등록하기</button>
                             <button class="saveBtn" id="questionSaveBtn">저장</button>
                         </div>
-                        <div class="workBox">
-                            <div class="question-answer-box">
+                        <div class="workBox" >
+                        	<div class="answered-box-result">
+	                        	<ul id="answered-box-ul">
+	                        		<li>
+	                        			<div class="question-box">Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</div>
+                        				<div class="answered-item"id="startServiceId"></div>
+	                        		</li>
+                        			<li>
+		                        		<div class="question-box">Q. 어떤 서비스를 전문적으로 제공하나요?</div>
+		                        		<div class="answered-item"id="specialListId"></div>
+	                        		</li>
+	                        		<li>
+		                        		<div class="question-box">Q. 서비스의 견적은 어떤 방식으로 산정 되나요?</div>
+		                        		<div class="answered-item"id="methodId"></div>
+	                        		</li>
+	                        		<li>
+		                        		<div class="question-box">Q. 완료한 서비스 중 대표적인 서비스는 무엇인가요? 소요 시간은 얼마나 소요 되었나요?</div>
+		                        		<div class="answered-item"id="whatisMainCategoryId"></div>
+	                        		</li>
+	                        		<li>
+		                        		<div class="question-box">Q. A/S 또는 환불 규정은 어떻게 되나요?</div>
+		                        		<div class="answered-item"id="whatisreturnId"></div>
+	                        		</li>
+	                        	</ul>
+                        	</div>
+                            <div class="question-hidden-workBox">
                                 <ul>
                                     <li>
                                         <div class="question-box">Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</div>
+                                        <input type="hidden" value="1">
                                         <textarea name="answerBox" rows="6"placeholder="상담, 예약, 서비스 진행, 대금 납부까지 어떻게 진행하는지 자세히 적어주세요."></textarea>
                                     </li>
                                     <li>
                                         <div class="question-box">Q. 어떤 서비스를 전문적으로 제공하나요?</div>
+                                        <input type="hidden" value="2">
                                         <textarea name="answerBox" rows="6" placeholder="제공하는 서비스를 조금 더 구체적으로 설명해주세요."></textarea>
                                     </li>
                                     <li>
                                         <div class="question-box">Q. 서비스의 견적은 어떤 방식으로 산정 되나요?</div>
+                                        <input type="hidden" value="3">
                                         <textarea name="answerBox" rows="6" placeholder="답변을 추가해주세요."></textarea>
                                     </li>
                                     <li>
                                         <div class="question-box">Q. 완료한 서비스 중 대표적인 서비스는 무엇인가요? 소요 시간은 얼마나 소요 되었나요?</div>
+                                        <input type="hidden" value="4">
                                         <textarea name="answerBox" rows="6" placeholder="답변을 추가해주세요."></textarea>
                                     </li>
                                     <li>
                                         <div class="question-box">Q. A/S 또는 환불 규정은 어떻게 되나요?</div>
+                                        <input type="hidden" value="5">
                                         <textarea name="answerBox" rows="6" placeholder="답변을 추가해주세요."></textarea>
                                     </li>
                                 </ul>
@@ -331,181 +386,38 @@
             </div>
         </div>
     </div>
-        <!-- 대표서비스, 제공서비스 모달 -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">어떤 서비스를 제공할 수 있나요?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div id="selectDetailCategoryId" class="mainCategoryWrap">
-	                <div class="modal-body">
-					        <div class="wrap" id="main-category-list">
-					            <div class="category" id="mainCategoryBoxId">
-					            </div>
-					        </div>
-					        <div class="wrap2" id="detail-category-list">
-					            <div class="category" id="detailCategoryBoxId">
-					            </div>
-					        </div>
-			                <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" onclick="selectMainCategory();">이전</button>
-			                <button type="button"class="btn" id="selectDetailCateBtn"onclick="selectDetailCategory();">다음</button>
-			                <button type="button" class="btn" id="selectDetailCateBtn2"onclick="insertDetailCategory();" style="display:none">다음</button>
-			              </div>
-	            	</div>
-		        </div>
-            </div>
-        </div>
-    </div>
-    <!-- 사진 및 동영상 모달 -->
-    <div class="modal fade" id="uploadPicture" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">사진 및 동영상</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <main class="app">
-                    <div class="upload-header">
-                        <h2>사진 업로드</h2>
-                        <div class="server-message"></div>
-                    </div>
-            
-                    <div class="input-div">
-                        <p>이미지를 드래그 & 드랍으로 넣거나 <span class="browse">파일 찾기</span></p>
-                        <input type="file" class="file" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
-                    </div>
-            
-                    <form action="" id="saved-form">
-                        <div class="upload-header">
-                            <h3>업로드된 사진</h3>
-                            <button type="submit">Delete</button>
-                        </div>
-                        <div class="saved-div"></div>
-                    </form>
-            
-                    <form action="" id="queued-form">
-                        <div class="upload-header">
-                            <h3>업로드될 사진</h3>
-                            <button type="submit">Upload</button>
-                        </div>
-                        <div class="queued-div"></div>
-                    </form>
-                </main>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit"class="btn">다음</button>
-            </div>
-        </div>
-        </div>
-    </div>
+    <input type="hidden" class="comepleteOrNot" id="profilePictureComplete">
+    <input type="hidden" class="comepleteOrNot" id="mainCategoryComplete">
+    <input type="hidden" class="comepleteOrNot" id="subCategoryComplete">
+    <input type="hidden" class="comepleteOrNot" id="detailDescriptionComplete">
+    <input type="hidden" class="comepleteOrNot" id="areaComplete">
+    <input type="hidden" class="comepleteOrNot" id="oneLineComplete">
+    <input type="hidden" class="comepleteOrNot" id="phoneAvailableComplete">
+    <input type="hidden" class="comepleteOrNot" id="licenseComplete">
+    <input type="hidden" class="comepleteOrNot" id="porfolioComplete">
+    <input type="hidden" class="comepleteOrNot" id="imageVideoComplete">
+    <input type="hidden" class="comepleteOrNot" id="questionComplete">
+    <%@include file="modal/detailCategoryModal.jsp" %>
+    <%@include file="modal/mainCategoryModal.jsp" %>
+    <%@include file="modal/profilePictureUploadModal.jsp" %>
+    <%@include file="imageUpload.jsp" %>
     <input type="hidden" id="userNo" value="${loginUser.userNo }">
     <input type="hidden" id="email" value="${loginUser.email }">
+    <input type="hidden" id="contextPath" value="${contextPath }">
+    <input type="hidden" id="profileNo" >
+    <input type="hidden" id="changeName">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-    <script src="${contextPath }/resources/js/profileMainPage.js"></script>
-    <script src="${contextPath }/resources/js/fileUpload.js"></script>
-    <script src="${contextPath }/resources/js/banner.js"></script>
-    <script>
-    
-    	$(function(){
-    		
-    		$.ajax({
-    			url: "selectMainCategoryModal.an",
-    			data: {currentPage:1},
-    			success: function(map) {
-    				console.log(map.list);
-    				var list = map.list
-    				var str = "";
-    				
-    				for(var i in list){
-    					str +=  "<div class='main-category'>"      
-								      +"<label class='container'>"+list[i].categoryName+""          
-								      +" <input type='checkbox' name='checkedCategory' value="+list[i].categoryNo+">"              
-								      +"<span class='checkmark'></span>"              
-						      		  +"</label>"          
-						      	+"</div>"      
-    				}
-					$("#mainCategoryBoxId").html(str); 
-					$("#detail-category-list").css("display",'none');
-    			}
-    		});
-    	});
-    	function selectDetailCategory(){
-    		$("#main-category-list").css("display",'none'); 
-    		$("#detail-category-list").css("display",'block');
-    		$("#selectDetailCateBtn").css("display",'none');
-    		$("#selectDetailCateBtn2").css("display",'block');
-    		var checkedCategoryArray = [];
-    		$("input[name='checkedCategory']:checked").each(function(){
-    			 checkedCategoryArray.push(parseInt($(this).val(), 10));
-    		})
-			 $.ajax({
-				url: "selectDetailCategoryModal.an",
-				data: {"checkedCategory": checkedCategoryArray},
-				success: function(list){
-					var str = "";
-    				for(var i in list){
-    					str +=  "<div class='main-category'>"      
-								      +"<label class='container'>"+list[i].detailName+""          
-								      +" <input type='checkbox' name='detailCheckedCategory' value='"+list[i].detailName+"'>"              
-								      +"<span class='checkmark'></span>"              
-						      		  +"</label>"          
-						      	+"</div>"      
-    				}
-    				$("#detailCategoryBoxId").html(str);
-    				
-				}
-			});
-		}
-    </script>
-    <script>
-    
-    	function insertDetailCategory(){
-    		
-    		var checkedCategory = [];
-    	    $("input[name='detailCheckedCategory']:checked").each(function(){
-    	    	checkedCategory.push($(this).val());
-    	    });
-    		$.ajax({
-    			url : "insertSubCategory.pr",
-    			data : {
-    				checkedCategory: checkedCategory,
-    				userNo: $("#userNo").val()
-    			},
-    			success : function(data){
-    				console.log('카테고리 리스트',data);
-    				
-    				$.ajax({
-    			    	url : "selectAllProfileInfo.pr",
-    			    	data : {userNo: $("#userNo").val()},
-    			    	success : function(result){
-    			    		
-    			    		console.log('result: ',result);
-    			    		var subServiceString = result.subService;
-    			    		var categoryArray = subServiceString.split(','); 
-    			    		var str = "";
-    			    		for(var i in categoryArray){
-    			    			str += "<div class='category-box'>"+categoryArray[i]+"</div>"
-    			    		}
-    			    		$(".categery-container").append(str);
-    			    	}
-    			    	
-    			    });
-    			}
-    		});
-    	}
-    </script>
-    <script>
-        $("#nickname-box").keyup(function(){
-           $("#currNumberOfNickname").text($(this).val().length);
-        });
-    </script>
-    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="${contextPath }/resources/js/profile/profileMainPage.js"></script>
+    <script src="${contextPath }/resources/js/profile/imageVideo.js"></script>
+    <script src="${contextPath }/resources/js/profile/banner.js"></script>
+    <script src="${contextPath }/resources/js/profile/detailCategory.js"></script>
+    <script src="${contextPath }/resources/js/profile/onload.js"></script>
+    <script src="${contextPath }/resources/js/profile/mainCategory.js"></script>
     <script src="${contextPath }/resources/js/announcement.js"></script>
+    <script src="${contextPath }/resources/js/profile/kakaoFindingAddressAPI.js"></script>
+    <script src="${contextPath }/resources/js/profile/profilePicture.js"></script>
+
 </body>
 </html>

@@ -15,7 +15,6 @@
   			<result column="GENDER" property="gender"/>
   			<result column="ADDRESS" property="address"/>
   			<result column="IMAGES" property="images"/>
-  			<result column="CATEGORY_NO" property="categoryNo"/>
   			<result column="USER_POINT" property="userPoint"/>
   			<result column="STATUS" property="status"/>
   		</resultMap>
@@ -28,19 +27,46 @@
 	                ,EMAIL
 	                ,USER_PASSWORD
 	                ,USER_NICKNAME
-	                ,ADDRESS
-	                ,CATEGORY_NO)
+	                ,ADDRESS)
 			VALUES (
 	               SEQ_MNO.NEXTVAL
 	              ,#{email}
 	        	  ,#{userPassword}
 	        	  ,#{userNickName}
 	        	  ,#{address}
-	              ,#{categoryNo}
 			)
   		</insert>
   		
-  		
+  		<insert id="insertProfile">
+  			INSERT INTO PROFILE (PROFILE_NO,USER_NO)
+  			VALUES(SEQ_PNO.NEXTVAL,SEQ_MNO.CURRVAL)
+  		</insert>
+  		<insert id="insertQAcomment">
+  			INSERT INTO QA_COMMENT (QN_ANSWER_NO, USER_NO, CREATE_DATE, QN_NO, QNA_TYPE, QA_ANSWER, QUESTION_NUM)
+			SELECT SEQ_QACOMMENT.NEXTVAL, SEQ_MNO.CURRVAL, SYSDATE, 0, 'profile-comment', '', LEVEL
+			FROM DUAL
+			CONNECT BY LEVEL &lt;= 5
+			 
+  		</insert>
+  		<insert id="insertBasicImage">
+  			INSERT INTO ATTACHMENT(AT_NO
+									,ORIGIN_NAME
+									,CHANGE_NAME
+									,UPLOAD_DATE
+									,FILE_LEVEL
+									,FILE_TYPE
+									,REF_NO)
+			VALUES(
+				SEQ_ATT.NEXTVAL
+			   ,'기본사진'
+			   ,'resources/uploadFiles/202312280987654321.jpg'
+			   ,''
+			   ,0
+			   ,'profile-picture'
+			   ,SEQ_PNO.CURRVAL
+			)
+			
+  		</insert>
   		<!-- 로그인 -->
   		<select id="loginMember" parameterType="member" resultMap="memberResultSet">
   			SELECT 
@@ -54,10 +80,9 @@
 		        GENDER,
 		        ADDRESS,
 		        IMAGES,
-		        CATEGORY_NO,
 		        USER_POINT,
 		        STATUS
-		    FROM MEMBER
+		    FROM MEMBER 
 		    WHERE EMAIL = #{email}
 		    AND STATUS ='Y'
   		</select>
@@ -77,10 +102,5 @@
 			WHERE EMAIL= #{email}
   		</select>
   		
-  		<select id="findPwdCheck" resultType="_int" parameterType="string">
-  			SELECT count(*)
-			FROM MEMBER 
-			WHERE EMAIL= #{email}
-  		</select>
   
   </mapper>
