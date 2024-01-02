@@ -79,7 +79,7 @@
 				,CHANGE_NAME
 		FROM PROFILE P
 		JOIN ATTACHMENT A ON(PROFILE_NO=REF_NO)
-		WHERE USER_NO = #{userNo}
+		WHERE REF_NO = #{userNo}
         AND FILE_TYPE = 'profile-picture'
 		
 	</select>

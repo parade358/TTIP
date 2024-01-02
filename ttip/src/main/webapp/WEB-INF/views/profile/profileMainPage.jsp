@@ -214,7 +214,9 @@
                             <button class="editBtn">수정</button>
                             <button class="saveBtn">저장</button>
                         </div>
-                        <div class="workBox"></div>
+                        <div class="workBox">
+                        
+                        </div>
                     </div>
                     <hr>
                     <div class="item">
@@ -341,7 +343,7 @@
                     <div class="bannerContainer">
                         <div class="banner-item">
                             <div class="profilePercentageBanner">
-                                <h2> 프로필 완성도 <span class="barPercentage">50%</span></h2>
+                                <h2> 프로필 완성도 <span class="barPercentage" id="barPercentageText"></span></h2>
                                 <div class="edit"></div>
                                 <div class="workBox">
                                     <div class="progressContainer">
@@ -352,17 +354,19 @@
                                 </div>
                             </div>
                             <div class="profilePercentageBanner">
-                                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true"
+                                <swiper-container class="mySwiper" pagination=true pagination-clickable="true" navigation="true"
                                 centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-                                <swiper-slide>Slide 1</swiper-slide>
-                                <swiper-slide>Slide 2</swiper-slide>
-                                <swiper-slide>Slide 3</swiper-slide>
-                                <swiper-slide>Slide 4</swiper-slide>
-                                <swiper-slide>Slide 5</swiper-slide>
-                                <swiper-slide>Slide 6</swiper-slide>
-                                <swiper-slide>Slide 7</swiper-slide>
-                                <swiper-slide>Slide 8</swiper-slide>
-                                <swiper-slide>Slide 9</swiper-slide>
+                                <swiper-slide>눈길을 끌 수 있는 프로필을 만들어보아요!</swiper-slide>
+                                <swiper-slide>나의 전문성을 보여줄 수 있는 대표서비스를 정해보아요</swiper-slide>
+                                <swiper-slide>여러재능을 보여주세요!</swiper-slide>
+                                <swiper-slide>다른 회원들에게 자신을 어필할수 있는 상세설명</swiper-slide>
+                                <swiper-slide>주변에 있는 사람들과 빠른매칭을 원한다면 지역선택!</swiper-slide>
+                                <swiper-slide>한줄로 자신을 표현해보아요</swiper-slide>
+                                <swiper-slide>방해받고 싶지 않은 시간대를 정해요</swiper-slide>
+                                <swiper-slide>자신의 전문성을 입증해보아요!</swiper-slide>
+                                <swiper-slide>자신이 경험했던 것들을 올려보아요</swiper-slide>
+                                <swiper-slide>주목을 끌 수 있는 사진들을 참고해보세요</swiper-slide>
+                                <swiper-slide>궁금한 것들을 미리 적어놓아요</swiper-slide>
                                 </swiper-container>
                             </div>
                             <div class="profilePercentageBanner">
@@ -397,6 +401,7 @@
     <input type="hidden" class="comepleteOrNot" id="porfolioComplete">
     <input type="hidden" class="comepleteOrNot" id="imageVideoComplete">
     <input type="hidden" class="comepleteOrNot" id="questionComplete">
+   
     <%@include file="modal/detailCategoryModal.jsp" %>
     <%@include file="modal/mainCategoryModal.jsp" %>
     <%@include file="modal/profilePictureUploadModal.jsp" %>
@@ -418,6 +423,7 @@
     <script src="${contextPath }/resources/js/announcement.js"></script>
     <script src="${contextPath }/resources/js/profile/kakaoFindingAddressAPI.js"></script>
     <script src="${contextPath }/resources/js/profile/profilePicture.js"></script>
+<%--     <script src="${contextPath }/resources/js/profile/barPercentage.js"></script> --%>
 
 </body>
 </html>

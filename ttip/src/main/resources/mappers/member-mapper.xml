@@ -58,8 +58,8 @@
 									,REF_NO)
 			VALUES(
 				SEQ_ATT.NEXTVAL
-			   ,'기본사진'
-			   ,'resources/uploadFiles/202312280987654321.jpg'
+			   ,''
+			   ,''
 			   ,''
 			   ,0
 			   ,'profile-picture'

@@ -12,14 +12,22 @@
    		    	data : {userNo: $("#userNo").val()},
    		    	success : function(result){
    		    		console.log('모든 프로필 정보',result);
+   		    		
    		    		//대표 서비스
-   		    		if(result.mainService!=""){
+   		    		if(result.mainService!=null){
+   		    			console.log('대표서비스 null이 아니지?');
 	   		    		var selectedCategory = result.mainService;
 			    		var str = "<div class='category-box'>"+selectedCategory+"</div>"
 			    		$("#mainCategoryContainerBox .category-box:not(#serviceAdd2)").remove();
 			    		$("#mainCategoryContainerBox").append(str);
+			    		
+			    		$('#mainCategoryComplete').val('true');
+			    		$('swiper-slide:nth-child(2)').remove();
+			    	}else{
+			    		$('#mainCategoryComplete').val('false');
+			    		$('swiper-slide:nth-child(2)').show();
 			    	}
-			    	if(result.subService!=""){
+			    	if(result.subService!=null){
 	   		    		var selectedCategory = [];
 			    		selectedCategory = result.subService.split(',');
 			    		var str = "";
@@ -28,20 +36,43 @@
 			    		}
 			    		$("#categoryContainerBox .category-box:not(#serviceAdd)").remove();
 			    		$("#categoryContainerBox").append(str);
+			    		$('#subCategoryComplete').val('true');
+			    		$('swiper-slide:nth-child(3)').remove();
+			    	}else{
+			    		$('#subCategoryComplete').val('false');
+			    		$('swiper-slide:nth-child(3)').show();
 			    	}
    		    		
 		    		//한줄소개
-		    		var introduceStr = result.oneLineIntro;
-		    		$("#introduce-result").text(introduceStr);
+		    		if(result.oneLineIntro!=null){
+				    		var introduceStr = result.oneLineIntro;
+				    		$("#introduce-result").text(introduceStr);
+		    				$('#oneLineComplete').val('true');
+			    		
+			    	}else{
+			    		$('#oneLineComplete').val('false');
+			    	}
+   		    		
 		    		
 		    		//연락 가능 시간
-		    		var timeStr = result.phoneAvailable
-		    		$("#time-selected-result").html(timeStr);
+		    		if(result.phoneAvailable!=null){
+				    		var timeStr = result.phoneAvailable
+				    		$("#time-selected-result").html(timeStr);
+		    				$('#phoneAvailableComplete').val('true');
+			    		
+			    	}else{
+			    		$('#phoneAvailableComplete').val('false');
+			    	}
 		    		
 		    		//서비스 상세설명
-		    		var detailDescripStr = result.serviceDetailContent;
-		    		$("#detail-description-result").html(detailDescripStr);
-		    		
+		    		if(result.serviceDetailContent!=null){
+				    		var detailDescripStr = result.serviceDetailContent;
+				    		$("#detail-description-result").html(detailDescripStr);
+		    				$('#detailDescriptionComplete').val('true');
+			    		
+			    	}else{
+			    		$('#detailDescriptionComplete').val('false');
+			    	}
 		    		//프로필 번호
 		    		var profileNo = result.profileNo;
 		    		$("#profileNo").val(profileNo);
@@ -51,8 +82,15 @@
 		    		$("#changeName").val(changeName);
 		    		
 		    		//이미지 불러오기
-		    		var profile = result;
-		    		$('#finalProfilePictureId').prop('src', $("#contextPath").val()+"/"+ profile.changeName);
+		    		var profile = result.changeName;
+		    		if(profile!=null){
+			    		$('#finalProfilePictureId').prop('src', $("#contextPath").val()+"/"+ profile);
+		    			$('#profilePictureComplete').val('true');
+		    		}else{
+		    			$('#profilePictureComplete').val('false');
+		    		}
+		    		
+		    		checkProgress();
    		    	}
    		    });
    		    
@@ -102,6 +140,13 @@
 				        		$(this).parent().show();
 			        		});
 	        			}
+	        			if(count==5){
+	        				console.log('count확인: false');
+	        				$('#questionComplete').val('false');
+	        			}else{
+	        				console.log('count확인: true');
+	        				$('#questionComplete').val('true');
+	        			}
 	        	},
 	        	error: function(result){
 	        		console.log('질문답변을 가져오기 실패');
@@ -116,6 +161,7 @@
         			console.log('이미지 조회:',imageList);
         			var imageStr = "";
         			for(var image of imageList){
+        				
         				imageStr += "<div class='finalDetailImageBoxClass'>"
 		        						+"<img src='"+$("#contextPath").val()+'/'+image.changeName+"' alt='image'>"
 		        						+"<span onclick='deleteQueuedImage(${index})'>&times;</span>"
@@ -124,6 +170,12 @@
         							+"</div>"
         			}
         			$("#imageVideoContainer").append(imageStr);
+        			
+        			if(imageList!=null){
+        				$('#imageVideoComplete').val('true');
+        			}else{
+        				$('#imageVideoComplete').val('false');
+        			}
         		}
         	});
    		    //멤버 정보 조회
@@ -131,8 +183,15 @@
         		url : "memberSessionReinsert.me",
         		data : {"email": $("#email").val()},
         		success : function(member){
+        		
 	        		$("#nickname-result").text(member.userNickName);
 	        		$("#sample6_address").text(member.address);
+	        		
+	        		if(member.userNickName!=null){
+	        			$('#areaComplete').val('true');
+	        		}else{
+	        			$('#areaComplete').val('false');
+	        		}
         		}
         	});
    		   
@@ -160,4 +219,184 @@
     			}
     		});
     	});
+    	
+    	function checkProgress(){
+    		console.log('바에 들어왔나?');
+    		console.log('프로필 히든값 :',$('#profilePictureComplete').val());
+    		console.log('대표서비스 히든값 :',$('#mainCategoryComplete').val());
+    	    var elem = document.getElementById("bar");
+    	    var currBarPercentage = 0;
+    	    
+    	    
+    	    if ($('#profilePictureComplete').val() == 'true') {
+    	    	console.log('프로필에 들어왔니?');
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 15;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#mainCategoryComplete').val() == 'true') {
+    	    	console.log('대표서비스 완성했을까?');
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 15;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#subCategoryComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 5;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#detailDescriptionComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 15;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#areaComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 15;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#oneLineComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 5;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#phoneAvailableComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 5;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#licenseComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 10;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#porfolioComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 5;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#imageVideoComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 5;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    if ($('#questionComplete').val() == 'true') {
+    	        var width = currBarPercentage;
+    	        var itemPercentage = 5;
+    	        currBarPercentage = itemPercentage + currBarPercentage;
+    	        var id = setInterval(frame, 10);
+    	        function frame() {
+    	            if (width >= currBarPercentage) {
+    	                clearInterval(id);
+    	            } else {
+    	                width++;
+    	                elem.style.width = width + "%";
+    	                $('#barPercentageText').html(currBarPercentage+'%');
+    	            }
+    	        }
+    	    }
+    	    
+    	    
+    	    
+    	}
     	

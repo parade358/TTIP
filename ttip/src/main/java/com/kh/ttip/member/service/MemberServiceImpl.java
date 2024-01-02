@@ -19,7 +19,11 @@ public class MemberServiceImpl implements MemberService {
 	//회원가입
 	@Override
 	public int insertMember(Member m) {
-		return memberDao.insertMember(sqlSession, m);
+		int result =  memberDao.insertMember(sqlSession, m);
+		memberDao.insertProfile(sqlSession);
+		memberDao.insertQAcomment(sqlSession);
+		memberDao.insertBasicImage(sqlSession);
+		return result;
 	}
 
 	//로그인
