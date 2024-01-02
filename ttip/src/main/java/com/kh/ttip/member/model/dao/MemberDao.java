@@ -35,4 +35,16 @@ public class MemberDao {
 		
 		return sqlSession.selectOne("memberMapper.findPwdCheck", email);
 	}
+
+	public void insertProfile(SqlSessionTemplate sqlSession) {
+		sqlSession.update("memberMapper.insertProfile");
+	}
+
+	public void insertQAcomment(SqlSessionTemplate sqlSession) {
+		sqlSession.update("memberMapper.insertQAcomment");
+	}
+
+	public void insertBasicImage(SqlSessionTemplate sqlSession) {
+		sqlSession.update("memberMapper.insertBasicImage");
+	}
 }

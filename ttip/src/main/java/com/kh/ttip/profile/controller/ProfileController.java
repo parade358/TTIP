@@ -46,7 +46,6 @@ public class ProfileController {
 	//파일명 수정 모듈
 			public String saveFile(MultipartFile upfile
 								  ,HttpSession session) {
-				System.out.println("유성이형 사랑해");
 				//파일명 수정하기
 				//1. 원본파일명 추출
 				String originName = upfile.getOriginalFilename();
@@ -110,16 +109,21 @@ public class ProfileController {
 		
 		ArrayList<Image> list = new ArrayList<>();
 		//기존에 데이터가 있었다면 기존파일 삭제
-		if(oldFileNoArray != null && oldFileNoArray.length > 0 && oldFileNoArray[0] != "") {
-			//새로 첨부된 파일이 있고 기존 파일도 있다면 
+		if(oldFileNoArray.length > 0) {
+			
+			System.out.println("삭제하는 곳에 들어왔니?");
+			//새로 첨부된 파일이 있고 기존 파일도 있다면
 			//파일정보가 등록된 데이터에서 변경작업을 한다. update
 			//파일번호(식별자)를 이용하여 기존데이터에서 변경하기. (덮어쓰기)
-			service.deleteExistedImages(oldFileNoArray);
+			int result = service.deleteExistedImages(oldFileNoArray);
+			System.out.println("삭제 결과:"+result);
 			//기존 파일 삭제 해주기 (저장경로 + 원본파일명 ) - 원본파일명은 view에서 넘겨줌
-			String savePath = session.getServletContext().getRealPath("/");
+			
 			for(String changeName : oldChangeNameArray) {
+				String savePath = session.getServletContext().getRealPath("/"+changeName);
 				
-				new File(savePath+changeName).delete();
+				System.out.println("savePath:"+savePath);
+				new File(savePath).delete();
 			}
 			
 		}
@@ -263,7 +267,7 @@ public class ProfileController {
 		
 		System.out.println("userNo맞나?"+userNo);
 		Profile profile = service.selectAllProfileInfo(userNo);
-		System.out.println("profile:"+profile);
+		System.out.println("profile 모든 정보:"+profile);
 		return profile;
 	}
 	

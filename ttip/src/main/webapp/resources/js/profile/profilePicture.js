@@ -29,9 +29,14 @@
                     $.ajax({
                         url: "selectAllProfileInfo.pr",
                         data: { userNo: $("#userNo").val() },
-                        success: function (profile) {
-                            $('#finalProfilePictureId').prop('src', '${contextPath}/' + profile.changeName);
-                            $('#changeName').val(profile.changeName);
+                        success: function (result) {
+                            var profile = result.changeName;
+				    		if(profile!=null){
+					    		$('#finalProfilePictureId').prop('src', $("#contextPath").val()+"/"+ profile);
+				    			$('#profilePictureComplete').val('true');
+				    		}else{
+				    			$('#profilePictureComplete').val('false');
+				    		}
                         }
                     });
                 },

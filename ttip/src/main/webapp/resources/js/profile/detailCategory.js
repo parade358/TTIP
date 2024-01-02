@@ -47,6 +47,7 @@
 	    			    	url : "selectAllProfileInfo.pr",
 	    			    	data : {userNo: $("#userNo").val()},
 	    			    	success : function(result){
+	    			    		console.log('result확인해보자',result);
 	    			    		var selectedCategory = [];
 	    			    		selectedCategory = result.subService.split(',');
 	    			    		var str = "";
