@@ -23,4 +23,7 @@ public class Profile {
 	private String serviceDetailContent;
 	private String changeName;
 	private String mainService;
+	private String address;
+	private String license;
+	private String portfolio;
 }

@@ -34,6 +34,19 @@
 				    		if(profile!=null){
 					    		$('#finalProfilePictureId').prop('src', $("#contextPath").val()+"/"+ profile);
 				    			$('#profilePictureComplete').val('true');
+				    			slide2++;
+				               slide3++;
+				               slide4++;
+				               slide5++;
+				               slide6++;
+				               slide7++;
+				               slide8++;
+				               slide9++;
+				               slide10++;
+				               slide11++;
+				               
+				               removeSlideFunction();
+			       				location.reload();
 				    		}else{
 				    			$('#profilePictureComplete').val('false');
 				    		}

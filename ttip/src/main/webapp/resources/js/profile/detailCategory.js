@@ -56,10 +56,22 @@
 	    			    		}
 	    			    		$("#categoryContainerBox .category-box:not(#serviceAdd)").remove();
 	    			    		$("#categoryContainerBox").append(str);
+	    			    		 slide4++;
+					               slide5++;
+					               slide6++;
+					               slide7++;
+					               slide8++;
+					               slide9++;
+					               slide10++;
+					               slide11++;
+				               
+				               removeSlideFunction();
+			             	location.reload();
 	    			    	}
 	    			    	
 	    					});
 						 $('#exampleModal').modal('hide');
+						 
     			}
   			  });
     		});

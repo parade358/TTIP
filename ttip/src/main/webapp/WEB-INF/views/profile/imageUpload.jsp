@@ -26,19 +26,10 @@
                         <p>이미지를 드래그 & 드랍으로 넣거나 <span class="browse">파일 찾기</span></p>
                         <input type="file" class="file" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
                     </div>
-            
-                    <form action="" id="saved-form">
-                        <div class="upload-header">
-                            <h3>업로드된 사진</h3>
-                            <button type="submit">Delete</button>
-                        </div>
-                        <div class="saved-div"></div>
-                    </form>
-            
                     <form action="" id="queued-form">
                         <div class="upload-header">
                             <h3>업로드될 사진</h3>
-                            <button type="submit">Upload</button>
+                            <button type="submit" class="uploadBtn">Upload</button>
                         </div>
                         <div class="queued-div"></div>
                     </form>

@@ -24,6 +24,7 @@
   		<result column="PHONE_AVAILABLE" property="phoneAvailable"/>
   		<result column="SERVICE_DETAIL_CONTENT" property="serviceDetailContent"/>
   		<result column="CHANGE_NAME" property="changeName"/>
+  		<result column="ADDRESS" property="address"/>
   	</resultMap>
   	<resultMap type="QA_comment" id="QA_commentResultSet">
   		<result column="QA_ANSWER" property="qaAnswer"/>
@@ -77,9 +78,11 @@
 				,PHONE_AVAILABLE 
 				,SERVICE_DETAIL_CONTENT 
 				,CHANGE_NAME
+				,ADDRESS
 		FROM PROFILE P
 		JOIN ATTACHMENT A ON(PROFILE_NO=REF_NO)
-		WHERE REF_NO = #{userNo}
+		JOIN MEMBER M USING(USER_NO)
+		WHERE USER_NO = #{userNo}
         AND FILE_TYPE = 'profile-picture'
 		
 	</select>

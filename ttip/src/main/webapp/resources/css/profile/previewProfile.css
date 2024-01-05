@@ -1,0 +1,212 @@
+
+div{
+    box-sizing: border-box;
+}
+.allContainerItem{
+    display: grid;
+    place-items: center;
+}
+.blurbackgrounAndProfile{
+    position:relative;
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-color: white;
+}
+.blurbackground{
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+
+}
+#blurbackgroundId{
+	width: 100%;
+  	height: 100%;
+  	transform:scale(2);      
+	-webkit-transform:scale(2);
+	-moz-transform:scale(1.1);  
+	-o-transform:scale(1.1);
+	webkit-filter: blur(5px); 
+    -moz-filter: blur(5px); 
+    -o-filter: blur(5px); 
+    -ms-filter: blur(5px); 
+    filter: blur(5px);
+	object-fit: cover; /* 옵션: 이미지의 비율을 유지하면서 부모 div를 가득 채움 */
+}
+.profilePictureContainer{
+    position: absolute;
+    width: 50vw;
+    bottom: 0;
+    border-color: white;
+    
+    /* background-color: aqua; */
+}
+.profilePictureItem{
+    width: 120px;
+    height: 120px;
+    z-index: 1;
+    background-color: antiquewhite;
+    border-radius: 18px;
+    overflow: hidden;
+}
+.bannerAndInfo{
+    display: grid;
+    width: 50vw;
+    grid-template-columns: 5fr 2fr;
+    margin-top: 20px;
+}
+[class^="container"] {
+    width: 100%;
+    min-height: 250px;
+}
+.twoSection:nth-child(2){
+    width: 100%;
+    padding-left: 10px;
+}
+.banner{
+    height: 20vh;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    position: sticky;
+    top:0;
+}
+
+.bannerItem:nth-child(2){
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-column-gap: 5px;
+}
+.likeBtn{
+    border-radius: 4px;
+    background-color: #737373;
+}
+.likeBtn i{
+    color: white;
+    font-size: 1.2rem;
+    
+}
+
+.chatBtn{
+    border-radius: 4px;
+    color: white;
+    background-color: #7752fe;
+    font-weight: bold;
+    font-size: 16px;
+}
+#container1Id{
+    min-height: 22vh; 
+}
+.container1 *{
+    margin-bottom: 10px;
+}
+.container2{
+    display: grid;
+    align-content: space-around;
+}
+hr{
+    margin: 7vh 0;
+}
+.category-box{
+    border: 1px solid #e1e1e1;
+    border-radius: 21px;
+    text-align: center;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  .saved-div,
+  .queued-div,
+  #imageVideoId {
+    width: 100%;
+    min-height: 150px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    position: relative;
+    border-radius: 5px;
+    border: 2px dotted black;
+    background-color: white;
+  }
+  
+  .saved-div .image,
+  .queued-div .image,
+  .finalDetailImageBoxClass {
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .saved-div .image:nth-child(4n),
+  .queued-div .image:nth-child(4n),
+  .finalDetailImageBoxClass:nth-child(4n) {
+    margin-right: 0;
+  }
+  
+  .saved-div .image img,
+  .queued-div .image img, 
+  .finalDetailImageBoxClass img{
+  
+    height: 100%;
+    width: 100%;
+  }
+  
+  
+  .saved-div .image span,
+  .queued-div .image span,
+  .finalDetailImageBoxClass span {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    font-size: 22px;
+    color: white;
+    background-color: red;
+    line-height: 13px;
+    border-radius: 30%;
+    text-align: center;
+    height: 15px;
+    width: 15px;
+    
+  }
+  
+  .saved-div .image span:hover,
+  .queued-div .image span:hover,
+  .finalDetailImageBoxClass span:hover {
+    opacity: 0.8;
+  }
+  
+  .saved-div .span--hidden,
+  .queued-div .span--hidden,
+  .finalDetailImageBoxClass .span--hidden{
+    visibility: hidden;
+  }
+  
+  .answered-box-result ul{
+  list-style-type: none;
+ 	 padding: 0;	
+ }
+ .question-box{
+    font-weight: bold;
+ }
+ .question-box~textarea{
+  margin-top: 5px;
+  width: 100%;
+  border-radius: 5px;
+ }
+ #subServiceId{
+ 	display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+ }
+ #previewProfileId{
+ 	width: 100%;
+ 	height: 100%;
+ 	object-fit: cover;
+ }
+ 

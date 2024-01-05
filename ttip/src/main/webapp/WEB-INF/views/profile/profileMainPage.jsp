@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- swiper -->
+    <link
+		  rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+		/>
     <link rel="stylesheet" href="${contextPath }/resources/css/profile/profileMainPage.css">
     <link rel="stylesheet" href="${contextPath }/resources/css/profile/fileUpload.css">
     <link rel="stylesheet" href="${contextPath }/resources/css/profile/categoryModal.css">
@@ -35,7 +40,7 @@
                         <div class="workBox">
                             <div class="profileContainer">
 							     <div class="upload">
-							        <img src="https://i.pinimg.com/564x/88/3d/74/883d74b5eca63acc4e07773f3a645ba6.jpg" id="finalProfilePictureId"alt="" width="100" height="100">
+							        <img src="https://i.pinimg.com/564x/88/3d/74/883d74b5eca63acc4e07773f3a645ba6.jpg" id="finalProfilePictureId">
 							        <div class="round">
 							            <button type="button"id="openProfilePictureModal" data-bs-toggle="modal" data-bs-target="#profilePictureUploadModal"></button>
 							            <i class="fa-solid fa-camera" style="color: #fff;"></i>
@@ -66,7 +71,7 @@
                                     </div>
                                     <div class="profileDetail-2">
                                         <a href="">활동분석</a>
-                                        <a href="">미리보기</a>
+                                        <a href="moveToPreviewProfile.pr?userNo=${loginUser.userNo}">미리보기</a>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +109,7 @@
                         <div class="edit"><button type="button" class="editBtn" data-bs-toggle="modal" data-bs-target="#detailCategoryModal" >수정</button></div>
                         <div class="workBox">
                             <div class="categery-container" id="categoryContainerBox">
-                                <div class="category-box" id="serviceAdd">+ 서비스 추가</div>
+                                <button type="button" class="category-box"data-bs-toggle="modal" data-bs-target="#detailCategoryModal" id="serviceAdd">+ 서비스 추가</button>
                             </div>
                         </div>
                     </div>
@@ -302,7 +307,7 @@
                                     <li>
                                         <div class="question-box">Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</div>
                                         <input type="hidden" value="1">
-                                        <textarea name="answerBox" rows="6"placeholder="상담, 예약, 서비스 진행, 대금 납부까지 어떻게 진행하는지 자세히 적어주세요."></textarea>
+                                        <textarea id="firstAnswerBox"name="answerBox" rows="6"placeholder="상담, 예약, 서비스 진행, 대금 납부까지 어떻게 진행하는지 자세히 적어주세요."></textarea>
                                     </li>
                                     <li>
                                         <div class="question-box">Q. 어떤 서비스를 전문적으로 제공하나요?</div>
@@ -354,23 +359,32 @@
                                 </div>
                             </div>
                             <div class="profilePercentageBanner">
-                                <swiper-container class="mySwiper" pagination=true pagination-clickable="true" navigation="true"
-                                centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-                                <swiper-slide>눈길을 끌 수 있는 프로필을 만들어보아요!</swiper-slide>
-                                <swiper-slide>나의 전문성을 보여줄 수 있는 대표서비스를 정해보아요</swiper-slide>
-                                <swiper-slide>여러재능을 보여주세요!</swiper-slide>
-                                <swiper-slide>다른 회원들에게 자신을 어필할수 있는 상세설명</swiper-slide>
-                                <swiper-slide>주변에 있는 사람들과 빠른매칭을 원한다면 지역선택!</swiper-slide>
-                                <swiper-slide>한줄로 자신을 표현해보아요</swiper-slide>
-                                <swiper-slide>방해받고 싶지 않은 시간대를 정해요</swiper-slide>
-                                <swiper-slide>자신의 전문성을 입증해보아요!</swiper-slide>
-                                <swiper-slide>자신이 경험했던 것들을 올려보아요</swiper-slide>
-                                <swiper-slide>주목을 끌 수 있는 사진들을 참고해보세요</swiper-slide>
-                                <swiper-slide>궁금한 것들을 미리 적어놓아요</swiper-slide>
-                                </swiper-container>
-                            </div>
-                            <div class="profilePercentageBanner">
-                                <button>상세글 작성하기</button>
+                                <!-- Slider main container -->
+									<div class="swiper">
+									  <!-- Additional required wrapper -->
+									  <div class="swiper-wrapper">
+									    <!-- Slides -->
+									    <div id="slide1"class="swiper-slide"><p>눈길을 끌 수 있는 프로필을 만들어보아요! </p><button class="insideSlideBtn"type="button"data-bs-toggle="modal" data-bs-target="#profilePictureUploadModal">사진 등록하기</button></div>
+									    <div id="slide2"class="swiper-slide"><p>나의 전문성을 보여줄 수 있는 대표서비스를 정해보아요</p><button class="insideSlideBtn"type="button"data-bs-toggle="modal" data-bs-target="#mainCategoryModal">대표서비스 등록하기</button></div>
+									    <div id="slide3"class="swiper-slide"><p>여러재능을 보여주세요!</p><button class="insideSlideBtn"type="button" data-bs-toggle="modal" data-bs-target="#detailCategoryModal">제공서비스 작성</button></div>
+									    <div id="slide4"class="swiper-slide"><p>다른 회원들에게 자신을 어필할수 있는 상세설명</p><button class="insideSlideBtn"type="button" id="editDetailServiceBtnSlide">상세설명 작성</button></div>
+									    <div id="slide5"class="swiper-slide"><p>주변에 있는 사람들과 빠른매칭을 원한다면 지역선택!</p><button class="insideSlideBtn"type="button" onclick="sample6_execDaumPostcode();">활동지역 선택</button></div>
+									    <div id="slide6"class="swiper-slide"><p>한줄로 자신을 표현해보아요</p><button class="insideSlideBtn"type="button" id="editOneLineBtnSlide">한줄소개 작성</button></div>
+									    <div id="slide7"class="swiper-slide"><p>방해받고 싶지 않은 시간대를 정해요</p><button class="insideSlideBtn"type="button" id="editTimeBtnSlide">연락가능 시간설정</button></div>
+									    <div id="slide8"class="swiper-slide"><p>자신의 전문성을 입증해보아요!</p><button class="insideSlideBtn"type="button" id="">자격증 등록</button></div>
+									    <div id="slide9"class="swiper-slide"><p>자신이 경험했던 것들을 올려보아요</p><button class="insideSlideBtn"type="button" id="">포트폴리오 등록</button></div>
+									    <div id="slide10"class="swiper-slide"><p>주목을 끌 수 있는 사진들을 참고해보세요</p><button class="insideSlideBtn"type="button" data-bs-toggle="modal" data-bs-target="#uploadPicture">사진/동영상 등록</button></div>
+									    <div id="slide11"class="swiper-slide"><p>궁금한 것들을 미리 적어놓아요</p><button class="insideSlideBtn"type="button" onclick="showAnswerBox();">질문답변 작성</button></div>
+									    
+									  </div>
+									  
+			                           
+									  <!-- If we need pagination -->
+									  <div class="swiper-pagination"></div>
+									
+									  <!-- If we need scrollbar -->
+									  <div class="swiper-scrollbar"></div>
+									</div>
                             </div>
                             
                         </div>
@@ -390,6 +404,7 @@
             </div>
         </div>
     </div>
+   
     <input type="hidden" class="comepleteOrNot" id="profilePictureComplete">
     <input type="hidden" class="comepleteOrNot" id="mainCategoryComplete">
     <input type="hidden" class="comepleteOrNot" id="subCategoryComplete">
@@ -412,7 +427,7 @@
     <input type="hidden" id="profileNo" >
     <input type="hidden" id="changeName">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="${contextPath }/resources/js/profile/profileMainPage.js"></script>
     <script src="${contextPath }/resources/js/profile/imageVideo.js"></script>
@@ -423,6 +438,9 @@
     <script src="${contextPath }/resources/js/announcement.js"></script>
     <script src="${contextPath }/resources/js/profile/kakaoFindingAddressAPI.js"></script>
     <script src="${contextPath }/resources/js/profile/profilePicture.js"></script>
+
+
+    
 <%--     <script src="${contextPath }/resources/js/profile/barPercentage.js"></script> --%>
 
 </body>

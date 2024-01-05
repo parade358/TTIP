@@ -38,12 +38,14 @@ $("#nickname-box").keyup(function(){
 });
 /******************************** 한 줄 소개 ************************************/
  //한줄소개 수정하기
- document.getElementById("editOneLineBtn").addEventListener("click",function(){
+ function oneLineIntroduceWriting(){
  	document.querySelector("#saveOneLineBtn").style.display = 'block';
     document.querySelector("#editOneLineBtn").style.display = 'none';
     $("#introduce-result").hide();
     $(".one-line-introduce-hidden-workBox").show();
- });
+ }
+ document.getElementById("editOneLineBtn").addEventListener("click", oneLineIntroduceWriting);
+ document.getElementById("editOneLineBtnSlide").addEventListener("click", oneLineIntroduceWriting);
  //한줄소개 저장하기
   document.getElementById("saveOneLineBtn").addEventListener("click",function(){
  	document.querySelector("#saveOneLineBtn").style.display = 'none';
@@ -61,6 +63,22 @@ $("#nickname-box").keyup(function(){
    		    	success : function(result){
 		    		var str = result.oneLineIntro;
 		    		$("#introduce-result").html(str);
+		    		
+		    		if(result.oneLineIntro!=null){
+		                   var introduceStr = result.oneLineIntro;
+		                   $("#introduce-result").text(introduceStr);
+		                   $('#oneLineComplete').val('true');
+			               slide7++;
+			               slide8++;
+			               slide9++;
+			               slide10++;
+			               slide11++;
+			              
+			             	removeSlideFunction();
+			             	location.reload();
+		           }else{
+		               $('#oneLineComplete').val('false');
+		           }
    		    	}
    		    });
         },
@@ -74,14 +92,18 @@ $("#nickname-box").keyup(function(){
 $("#oneLineTextArea").keyup(function(){
    $("#currNumberOfOneLine").text($(this).val().length);
 });
+
+ 
 /******************************** 연락 가능 시간 ************************************/
 //연락 가능 시간 수정하기
- document.getElementById("editTimeBtn").addEventListener("click",function(){
+function chooseTimeWriting(){
  	document.querySelector("#saveTimeBtn").style.display = 'block';
     document.querySelector("#editTimeBtn").style.display = 'none';
     $("#time-selected-result").hide();
     $(".time-select-hidden-workBox").show();
- });
+ }
+ document.getElementById("editTimeBtn").addEventListener("click",chooseTimeWriting);
+ document.getElementById("editTimeBtnSlide").addEventListener("click",chooseTimeWriting);
 //연락 가능 시간 저장하기
  document.getElementById("saveTimeBtn").addEventListener("click",function(){
  	document.querySelector("#saveTimeBtn").style.display = 'none';
@@ -103,6 +125,13 @@ $("#oneLineTextArea").keyup(function(){
    		    	success : function(result){
 		    		var str = result.phoneAvailable;
 		    		$("#time-selected-result").html(str);
+		    		slide8++;
+	               slide9++;
+	               slide10++;
+	               slide11++;
+	               
+	               removeSlideFunction();
+			       location.reload();
    		    	}
    		    });
         },
@@ -113,13 +142,18 @@ $("#oneLineTextArea").keyup(function(){
     
  });
  /******************************** 서비스 상세설명 ************************************/
+ 
+ 
 //서비스 상세설명 수정하기
-document.getElementById('editDetailServiceBtn').addEventListener('click',function(){
+function detailServiceWriting(){
 	document.querySelector("#editDetailServiceBtn").style.display = 'none';
     document.querySelector("#saveDetailServiceBtn").style.display = 'block';
    $("#detail-description-result").hide();
     $(".detail-description-hidden-workBox").show();
-});
+    $("#detailDescriptionTextArea").focus();
+}
+document.getElementById('editDetailServiceBtn').addEventListener('click', detailServiceWriting);
+document.getElementById('editDetailServiceBtnSlide').addEventListener('click', detailServiceWriting);
 
 
 function detailDescripFunctions(){
@@ -170,6 +204,16 @@ function detailDescripFunctions(){
 	                        success: function (result) {
 	                            var str = result.serviceDetailContent;
 	                            $("#detail-description-result").html(str);
+	                            
+	                            slide5++;
+				               slide6++;
+				               slide7++;
+				               slide8++;
+				               slide9++;
+				               slide10++;
+				               slide11++;
+	                            removeSlideFunction();
+			       				location.reload();
 	                        }
 	                    });
 	                },
@@ -198,6 +242,7 @@ function showAnswerBox(){
     document.querySelector("#questionEnrollBtn").style.display = 'none';
     $(".question-hidden-workBox").show();
     $(".answered-box-result").hide();
+    $("#firstAnswerBox").focus();
 }
 
 //질문 답변 저장하기
@@ -288,6 +333,16 @@ document.getElementById("questionSaveBtn").addEventListener("click",function(){
 				        		$(this).parent().show();
 			        		});
 	        			}
+	        			
+	        			 if(count==5){
+			                   console.log('count확인: false');
+			                   $('#questionComplete').val('false');
+			               }else{
+			                   console.log('-------t1 질문잡변---------');
+			                   $('#questionComplete').val('true');
+			                   removeSlideFunction();
+			       				location.reload();
+			               }
 		        		
 		        	},
 		        	error: function(result){
@@ -304,3 +359,54 @@ document.getElementById("questionSaveBtn").addEventListener("click",function(){
 
     
  });
+ function removeSlideFunction(){
+   		console.log('slide1 수:',slide1);
+   		console.log('slide2 수:',slide2);
+   		console.log('slide3 수:',slide3);
+   		console.log('slide4 수:',slide4);
+   		console.log('slide5 수:',slide5);
+   		console.log('slide6 수:',slide6);
+   		console.log('slide7 수:',slide7);
+   		console.log('slide8 수:',slide8);
+   		console.log('slide9 수:',slide9);
+   		console.log('slide10 수:',slide10);
+   		console.log('slide11 수:',slide11);
+   		if($('#profilePictureComplete').val()=='true'){
+   			swiper.removeSlide(0-slide1);
+   		}
+   		if($('#mainCategoryComplete').val()=='true'){
+   			swiper.removeSlide(1-slide2);
+   		}
+   		if($('#subCategoryComplete').val()=='true'){
+   			swiper.removeSlide(2-slide3);
+   		}
+   		if($('#detailDescriptionComplete').val()=='true'){
+   			swiper.removeSlide(3-slide4);
+   		}
+   		if($('#areaComplete').val()=='true'){
+   			swiper.removeSlide(4-slide5);
+   		}
+   		if($('#oneLineComplete').val()=='true'){
+   			swiper.removeSlide(5-slide6);
+   		}
+   		if($('#phoneAvailableComplete').val()=='true'){
+   			swiper.removeSlide(6-slide7);
+   		}
+   		if($('#licenseComplete').val()=='true'){
+   			swiper.removeSlide(7-slide8);
+   		}else{
+   			console.log('slide8 삭제 실패');
+   		} 
+   		if($('#porfolioComplete').val()=='true'){
+   			swiper.removeSlide(8-slide9);
+   		}else{
+   			console.log('slide9 삭제 실패');
+   		} 
+   		if($('#imageVideoComplete').val()=='true'){
+   			swiper.removeSlide(9-slide10);
+   		}
+   		if($('#questionComplete').val()=='true'){
+   			swiper.removeSlide(10-slide11);
+   		}
+   		
+   }

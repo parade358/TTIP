@@ -99,7 +99,7 @@ function sendQueuedImagesToServer() {
         				console.log('image changeName:',imageList[i].changeName);
         				imageStr += "<div class='finalDetailImageBoxClass'>"
 		        						+"<img src='"+$("#contextPath").val()+'/'+imageList[i].changeName+"' alt='image'>"
-		        						+"<span onclick='deleteSavedImage("+i+")'>&times;</span>"
+		        						+"<span onclick='deleteSavedImage("+i+");'>&times;</span>"
 		        						+"<input type='hidden' name='oldFileNo' value='"+imageList[i].atNo+"'></input>"
 		        						+"<input type='hidden' name='oldChangeName' value='"+imageList[i].changeName+"'></input>"
         							+"</div>"
@@ -112,11 +112,14 @@ function sendQueuedImagesToServer() {
 }
 
 function deleteSavedImage(index){
+	console.log('index:',index);
+	 // i 변수가 현재 몇 번째 이미지인지를 나타내고 있다고 가정
+	var fileNo = $("span[onclick='deleteSavedImage("+index+");']").next().val();
 
-	$("span[onclick='deleteSavedImage(index)']").parent().remove();
+    	console.log('fileNo 확인합니다: ', fileNo);
+	 $("span[onclick='deleteSavedImage(" + index + ")']").parent().remove();
 	
-	var fileNo = $("span[onclick='deleteSavedImage("+index+")']").next().val();
-	console.log('fileNo확인합니다: ',fileNo);
+	
 	$.ajax({
 		url: "deleteOneDetailImage.pr",
 		data: {atNo: fileNo},
@@ -137,6 +140,15 @@ function deleteSavedImage(index){
         							+"</div>"
         			}
         			$("#imageVideoContainer").html(imageStr);
+        			if(imageList.length>0){
+		               $('#imageVideoComplete').val('true');
+		               console.log('slide10요소 체크',$('#slide10'));
+		               slide11++;
+		           }else{
+		               $('#imageVideoComplete').val('false');
+		           }
+		           removeSlideFunction();
+			       location.reload();
         		}
         	});
         }

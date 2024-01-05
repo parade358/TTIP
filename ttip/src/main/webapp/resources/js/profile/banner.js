@@ -1,4 +1,30 @@
-var mainSwiper = new Swiper(".swiper-container", {
+
+ var swiper = new Swiper('.swiper', {
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+    });
+
+
+
+
+
+
+
+
+
+/*var mainSwiper = new Swiper(".swiper-container", {
     autoplay: {
       delay: 2000,
       disableOnInteraction: false,
@@ -20,4 +46,4 @@ var mainSwiper = new Swiper(".swiper-container", {
     },
   });
   
-  mainSwiper.controller.control = pagingSwiper;
+  mainSwiper.controller.control = pagingSwiper;*/

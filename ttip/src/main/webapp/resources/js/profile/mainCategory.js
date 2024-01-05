@@ -46,6 +46,18 @@
 	    			    		var str = "<div class='category-box'>"+selectedCategory+"</div>"
 	    			    		$("#mainCategoryContainerBox .category-box:not(#serviceAdd2)").remove();
 	    			    		$("#mainCategoryContainerBox").append(str);
+	    			    		
+	    			    		 slide3++;
+					               slide4++;
+					               slide5++;
+					               slide6++;
+					               slide7++;
+					               slide8++;
+					               slide9++;
+					               slide10++;
+					               slide11++;
+		    			    	removeSlideFunction();
+				             	location.reload();
 	    			    	}
 	    			    	
 	    					});

@@ -10,8 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/member/enrollForm.css">
-<script
-	src="${pageContext.request.contextPath }/resources/js/member/enroll.js"></script>
+<%-- <script
+	src="${pageContext.request.contextPath }/resources/js/member/enroll.js"></script> --%>
 </head>
 <body>
 
@@ -22,13 +22,14 @@
 		<div class="signin-wrapper form active">
 			<div class="form-wrapper">
 				<h5>회원가입 👍</h5>
-				<form onsubmit="return joinForm()" action="insert.me" method="post">
+				<!-- onsubmit="return joinForm()" -->
+				<form action="insert.me" method="post">
 					<div class="email-container">
 						<input type="text" class="input" placeholder="이메일" name="email"
-							id="email" required> <input type="button" class="input"
-							value="전송" id="mailBtn" onclick="emailSend();">
+							id="email" required><!--  <input type="button" class="input"
+							value="전송" id="mailBtn" onclick="emailSend();"> -->
 					</div>
-					<div id="emailCheck" style="display: none;"></div>
+					<!-- <div id="emailCheck" style="display: none;"></div>
 					<div class="verification-container">
 						<input type="text" class="input" id="checkNum"
 							placeholder="이메일 인증번호" style="margin-top: 10px;" required>
@@ -36,7 +37,7 @@
 							<input type="button" id="check" class="input" value="확인"
 								style="margin-top: 10px;">
 						</div>
-					</div>
+					</div> -->
 					<div id="countdown" style="margin-left: 95px;"></div>
 					<input type="password" class="input" placeholder="비밀번호" id="pwd"
 						name="userPassword" required oninput="checkPwd()"><span

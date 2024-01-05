@@ -12,14 +12,12 @@ import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -366,6 +364,17 @@ public class ProfileController {
 			return result;
 		}
 		
+		@GetMapping("moveToPreviewProfile.pr")
+		public String moveToPreviewProfile(int userNo, Model m) {
+			
+			Profile profile = service.selectAllProfileInfo(userNo);
+			
+			System.out.println("----------------------------------------- preview 확인-----------------------------------------------");
+			System.out.println("profile:"+profile);
+			m.addAttribute("p",profile);
+			
+			return "profile/previewProfile";
+		}
 		
 		
 		

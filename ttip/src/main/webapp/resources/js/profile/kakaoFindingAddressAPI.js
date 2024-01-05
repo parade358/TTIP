@@ -30,6 +30,15 @@
 		        		data : {"email": $("#email").val()},
 		        		success : function(member){
 			        		$("#sample6_address").text(member.address);
+			        		slide6++;
+              				slide7++;
+			               slide8++;
+			               slide9++;
+			               slide10++;
+			               slide11++;
+			               
+			               removeSlideFunction();
+			       			location.reload();
 		        		}
 		        	});
 		        },
