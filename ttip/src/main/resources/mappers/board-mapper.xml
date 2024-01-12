@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="boardMapper">
+  		<resultMap type="board" id="boardResultSet">
+  			<result column="BOARD_NO" property="boardNo"/>
+  			<result column="BOARD_TITLE" property="boardTitle"/>
+  			<result column="BOARD_CONTENT" property="boardContent"/>
+  			<result column="CREATE_DATE" property="createDate"/>
+  			<result column="BOARD_COUNT" property="count"/>
+  			<result column="STATUS" property="status"/>
+  			<result column="BOARD_TYPE" property="boardType"/>
+  			<result column="USER_NO" property="userNo"/>
+  			<result column="USER_NICKNAME" property="boardWriter"/>
+  		</resultMap>
+  		
+  		
+	  <select id="selectListCount" resultType="_int">
+		  SELECT COUNT(*)
+		  FROM BOARD
+      </select>
+  		
+  		
+	  <select id="selectMyList" resultMap="boardResultSet" parameterType="string">
+	  		SELECT B.BOARD_NO, 
+					B.BOARD_TITLE, 
+					B.BOARD_CONTENT, 
+					B.CREATE_DATE, 
+					B.BOARD_COUNT, 
+					M.USER_NICKNAME
+			FROM BOARD B
+			JOIN MEMBER M ON B.USER_NO = M.USER_NO
+			WHERE B.USER_NO = #{userNo}
+			ORDER BY CREATE_DATE DESC
+	  </select>
+	  
+	  
+  	
+  </mapper>

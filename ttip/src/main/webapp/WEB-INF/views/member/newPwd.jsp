@@ -25,15 +25,14 @@
             <div class="form-wrapper">
                 <h5>비밀번호 재설정 👍</h5>
                 <h3>새로운 비밀번호를 <br>입력해주세요.</h3>
-                
-                <input type="password" class="input" placeholder="비밀번호" id="pwd"
-						name="userPassword" required oninput="checkPwd()" style="margin-bottom: 10px;"><span
-						id="pwMessage" class="message"></span> <input type="password"
-						class="input" placeholder="비밀번호 확인" id="confirmPassword" required
-						oninput="checkMatch()" style="margin-top: 10px; margin-bottom: 10px;"><span id="passwordMatchMessage"
-						class="message"></span>
-				<button class="button primary" id="chagePwd" style="margin-top: 10px;">비밀번호 변경</button>
-                
+                <form action="change_password.me" method="post">
+	                <input type="password" class="input" placeholder="비밀번호" id="pwd" name="userPassword" required oninput="checkPwd()" style="margin-bottom: 10px;">
+	                	<span id="pwMessage" class="message"></span> 
+	                <input type="password" class="input" placeholder="비밀번호 확인" id="confirmPassword" required oninput="checkMatch()" style="margin-top: 10px; margin-bottom: 10px;">
+	                	<span id="passwordMatchMessage" class="message"></span>
+					<button type="submit" class="button primary" id="changePwd" style="margin-top: 10px;">비밀번호 변경</button>
+                	<input type="hidden" id="email" name="email" value="${email}">
+                </form>
             </div>
         </div>
     </div>

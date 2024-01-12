@@ -6,11 +6,28 @@
   <mapper namespace="chatMapper">
   	
   	<resultMap type="chat" id="chatResultSet">
+  		<result column="CHAT_NO" property="chatNo"/>
   		<result column="CHAT_CONTENT" property="message"/>
   		<result column="FROM_USER" property="fromLogin"/>
   		<result column="TO_USER" property="toLogin"/>
   		<result column="FORMATTED_CREATE_DATE" property="createDate"/>
   	</resultMap>
+  	
+  		<resultMap type="member" id="memberResultSet">
+  			<result column="USER_NO" property="userNo"/>
+  			<result column="EMAIL" property="email"/>
+  			<result column="USER_PASSWORD" property="userPassword"/>
+  			<result column="USER_NICKNAME" property="userNickName"/>
+  			<result column="USER_NAME" property="userName"/>
+  			<result column="PHONE" property="phone"/>
+  			<result column="ENROLLDATE" property="enrollDate"/>
+  			<result column="GENDER" property="gender"/>
+  			<result column="ADDRESS" property="address"/>
+  			<result column="IMAGES" property="images"/>
+  			<result column="CATEGORY_NO" property="categoryNo"/>
+  			<result column="USER_POINT" property="userPoint"/>
+  			<result column="STATUS" property="status"/>
+  		</resultMap>
   	
   	<insert id="insertChat" parameterType="chat">
   		INSERT INTO CHAT(CHAT_NO
@@ -31,6 +48,12 @@
 		AND (FROM_USER = #{fromLogin} OR FROM_USER = #{toLogin})
 		AND (TO_USER = #{toLogin} OR TO_USER = #{fromLogin})
 		ORDER BY CREATE_DATE
+  	</select>
+  	
+  	<select id="selectChatUserList" resultMap="chatResultSet">
+  		SELECT TO_USER
+  		FROM CHAT
+  		WHERE FROM_USER = #{fromLogin}
   	</select>
   
   

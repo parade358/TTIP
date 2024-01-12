@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/member/enrollForm.css">
 <script
@@ -44,6 +43,12 @@
 						class="input" placeholder="비밀번호 확인" id="confirmPassword" required
 						oninput="checkMatch()"><span id="passwordMatchMessage"
 						class="message"></span>
+						
+					<div class="nickname-container">
+						<input type="text" class="input" placeholder="이름" name="userName" id="userName" required> 
+						
+					</div>
+						
 
 					<div class="nickname-container">
 						<input type="text" class="input" placeholder="별명"
@@ -57,28 +62,22 @@
 					<!-- 지역 선택 -->
 					<select name="address" id="address" required>
 						<option selected disabled hidden>지역</option>
-						<option>City1</option>
-						<option>City2</option>
-						<option>City3</option>
-						<option>City4</option>
-						<option>City5</option>
-						<option>City6</option>
-						<option>City7</option>
-						<option>City8</option>
-						<option>City9</option>
-						<option>City10</option>
+						<option>강서</option>
+						<option>강남</option>
+						<option>강동</option>
+						<option>강북</option>
+						<option>영등포</option>
+						<option>양천</option>
+						<option>구로</option>
 					</select>
 
-					<!-- 					<select type="number" name="categoryNo" required> -->
-					<!-- 						<option value="" disabled selected hidden>카테고리 선택</option> -->
-					<!-- 						<option value="1">스포츠/건강</option> -->
-					<!-- 						<option value="2">댄스</option> -->
-					<!-- 						<option value="3">외국어</option> -->
-					<!-- 						<option value="4">악기</option> -->
-					<!-- 						<option value="5">취미/생활</option> -->
-					<!-- 						<option value="6">사진/영상</option> -->
-					<!-- 						<option value="7">학업</option> -->
-					<!-- 					</select> -->
+					<div class="gender-container">
+						<label for=""> &nbsp; 성별 : </label> &nbsp;&nbsp;
+	                    <input type="radio" id="Male" value="M" name="gender" checked>
+	                    <label for="Male">남자</label> &nbsp;&nbsp;
+	                    <input type="radio" id="Female" value="F" name="gender">
+	                    <label for="Female">여자</label> &nbsp;&nbsp;
+					</div>
 
 
 					<div class="category-container">

@@ -24,42 +24,54 @@
         return isValid;
     }
 
-    function checkPwd() {
-        var pwInput = document.getElementById("pwd");
-        var pwMessage = document.getElementById("pwMessage");
+  function checkPwd() {
+    var pwInput = document.getElementById("pwd");
+    var pwMessage = document.getElementById("pwMessage");
 
-        var pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        var isValidPw = pwPattern.test(pwInput.value);
+    // 최소 8자, 대소문자, 숫자, 특수문자를 모두 포함해야 하는 정규표현식
+    var pwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    var isValidPw = pwPattern.test(pwInput.value);
 
-        if (isValidPw) {
-            pwMessage.innerHTML = "사용 가능한 비밀번호 입니다.";
-            pwMessage.className = "message";
-        } else {
-            pwMessage.innerHTML = "비밀번호는 최소 8자, 대소문자 및 숫자를 포함해야 합니다.";
-            pwMessage.className = "error-message";
-        }
+    if (isValidPw) {
+        pwMessage.innerHTML = "사용 가능한 비밀번호 입니다.";
+        pwMessage.className = "message";
 
-        return isValidPw;
+        // 유효성 검사를 통과한 경우에만 비밀번호 일치 여부를 체크
+        checkMatch();
+    } else {
+        pwMessage.innerHTML = "비밀번호는 최소 8자, 대소문자, 숫자, 특수문자를 포함해야 합니다.";
+        pwMessage.className = "error-message";
     }
 
-    function checkMatch() {
-        var passwordInput = document.getElementById("pwd");
-        var confirmPasswordInput = document.getElementById("confirmPassword");
-        var passwordMatchMessage = document.getElementById("passwordMatchMessage");
+    return isValidPw;
+}
 
-        var doPasswordsMatch = passwordInput.value === confirmPasswordInput.value;
+function checkMatch() {
+    var passwordInput = document.getElementById("pwd");
+    var confirmPasswordInput = document.getElementById("confirmPassword");
+    var passwordMatchMessage = document.getElementById("passwordMatchMessage");
 
-        if (doPasswordsMatch) {
-            passwordMatchMessage.innerHTML = "비밀번호가 일치합니다.";
-            passwordMatchMessage.className = "message";
-        } else {
-            passwordMatchMessage.innerHTML = "비밀번호가 일치하지 않습니다.";
-            passwordMatchMessage.className = "error-message";
-        }
+    var doPasswordsMatch = passwordInput.value === confirmPasswordInput.value;
 
-        return doPasswordsMatch;
+    if (doPasswordsMatch && confirmPasswordInput.value !== "") {
+        // 비밀번호가 일치하고 수정 시에는 일치하지 않다는 메시지 표시
+        passwordMatchMessage.innerHTML = "비밀번호가 일치합니다.";
+        passwordMatchMessage.className = "message";
+    } else if (confirmPasswordInput.value === "") {
+        // 확인 비밀번호가 비어있을 때의 메시지 표시
+        passwordMatchMessage.innerHTML = "확인 비밀번호를 입력해주세요.";
+        passwordMatchMessage.className = "error-message";
+    } else {
+        // 비밀번호가 일치하지 않을 때의 메시지 표시
+        passwordMatchMessage.innerHTML = "비밀번호가 일치하지 않습니다.";
+        passwordMatchMessage.className = "error-message";
     }
-    
+
+    return doPasswordsMatch;
+}
+
+
+
 
 
 function checkNickname() {

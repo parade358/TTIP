@@ -1,12 +1,22 @@
 package com.kh.ttip.common.websocket.server;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.kh.ttip.javamaster.model.service.ChatService;
+import com.kh.ttip.javamaster.model.vo.MessageModel;
+import com.kh.ttip.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,34 +25,44 @@ public class WebsocketMemberServer extends TextWebSocketHandler{
 	
 	private Set<WebSocketSession> users = new CopyOnWriteArraySet<>();
 	
+	@Autowired
+	private ChatService chatService;
 		
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
 		users.add(session);
 		
-		log.info("session = {}",session);
-		log.info("접속! 현재 접속자 수 : {}", users.size());
-		log.info("attribute : {}",session.getAttributes().get("loginUser"));
+		log.info("접속");
+		log.debug("session : {}",session);
+		log.debug("접속자의 아이디 : {}",((Member)session.getAttributes().get("loginUser")).getUserNickName()); //이거 없애면 user정보를 가져오지 못함. why?
+		log.info("접속 ! 현재 접속자 수 : {}",users.size());
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		//본인의 아이디와 전달할 메세지 붙여서 전달하기
 		
-		String userId = "관리자";
 		
-		//메세지랑 userId 붙여서 보내기
+		ObjectMapper objectMapper = new ObjectMapper();
 		
-		String text = "["+userId+"]" + message.getPayload();
+		MessageModel chatMessage = objectMapper.readValue(message.getPayload(), MessageModel.class);
 		
-		//새로 만든 텍스트를 넣고 TextMessage 생성하기
+		int result = chatService.insertChat(chatMessage);
 		
-		TextMessage newMessage = new TextMessage(text);
-		
-		//저장소에 담겨있는 회원들에게 메세지 전달하기
-		for(WebSocketSession s : users) {
-			s.sendMessage(newMessage);
+		for(WebSocketSession ws : users) {
+			// WebSocketSession == HttpSession (로그인정보,채팅방정보) 을 가로챈것..
+			String id = ((Member)ws.getAttributes().get("loginUser")).getUserNickName(); //test123와 test1이 채팅jsp에 접속하면 users에는 두개가 담겨있음.
+//			System.out.println("total id : "+id);
+//			System.out.println("보낸사람 id : "+chatMessage.getUserId());
+//			System.out.println("받는사람 id : "+chatMessage.getReceiveId());
+			//보낸사람 또는 받는사람중에 접속자가 있다면 
+			
+			if(id.equals(chatMessage.getFromLogin()) || id.equals(chatMessage.getToLogin())) {
+				//System.out.println("채팅이 지금 가는 id : "+id);
+				ws.sendMessage( new TextMessage( new Gson().toJson(chatMessage) ));
+			}
+			
 		}
 	}
 	

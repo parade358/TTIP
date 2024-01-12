@@ -250,7 +250,6 @@ ul {
     display: flex;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
 }
 
 .user-name {
@@ -267,11 +266,11 @@ ul {
 }
 
 .offline {
-    color: orange;
+    color: #B5E61D;
 }
 
 .user-container:hover {
-    background-color: #f5f5f5;
+    background-color: #6768B5;
     cursor: pointer;
 }
 

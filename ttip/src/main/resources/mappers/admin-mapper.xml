@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="adminMapper">
+  		<resultMap type="member" id="memberResultSet">
+  			<result column="USER_NO" property="userNo"/>
+  			<result column="EMAIL" property="email"/>
+  			<result column="USER_PASSWORD" property="userPassword"/>
+  			<result column="USER_NICKNAME" property="userNickName"/>
+  			<result column="USER_NAME" property="userName"/>
+  			<result column="PHONE" property="phone"/>
+  			<result column="ENROLLDATE" property="enrollDate"/>
+  			<result column="GENDER" property="gender"/>
+  			<result column="ADDRESS" property="address"/>
+  			<result column="IMAGES" property="images"/>
+  			<result column="CATEGORY_NO" property="categoryNo"/>
+  			<result column="USER_POINT" property="userPoint"/>
+  			<result column="STATUS" property="status"/>
+  		</resultMap>
+  
+  		<resultMap type="board" id="boardResultSet">
+  			<result column="BOARD_NO" property="boardNo"/>
+  			<result column="BOARD_TITLE" property="boardTitle"/>
+  			<result column="BOARD_CONTENT" property="boardContent"/>
+  			<result column="CREATE_DATE" property="createDate"/>
+  			<result column="BOARD_COUNT" property="count"/>
+  			<result column="STATUS" property="status"/>
+  			<result column="BOARD_TYPE" property="boardType"/>
+  			<result column="USER_NO" property="userNo"/>
+  			<result column="USER_NICKNAME" property="boardWriter"/>
+  		</resultMap>
+  		
+  		<resultMap type="chat" id="chatResultSet">
+  			<result column="CHAT_NO" property="chatNo"/>
+	  		<result column="CHAT_CONTENT" property="message"/>
+	  		<result column="FROM_USER" property="fromLogin"/>
+	  		<result column="TO_USER" property="toLogin"/>
+	  		<result column="FORMATTED_CREATE_DATE" property="createDate"/>
+  		</resultMap>
+  	
+  		<!-- 유저 정보 select -->
+  		<select id="selectUser" resultMap="memberResultSet">
+  			SELECT *
+  			FROM MEMBER
+  			ORDER BY ENROLLDATE DESC
+  		</select>
+  		
+  		<!-- 유저 정보 복구 -->
+  		<update id="restore" parameterType="string">
+  			UPDATE MEMBER
+  			SET STATUS = 'Y'
+  			WHERE EMAIL = #{email}
+  		</update>
+  		
+  		<!-- 유저 정보 탈퇴 -->
+  		<update id="out" parameterType="string">
+  			UPDATE MEMBER
+  			SET STATUS = 'N'
+  			WHERE EMAIL = #{email}
+  		</update>
+  		
+  		<!-- 게시글 정보 select -->
+  		 <select id="selectBoard" resultMap="boardResultSet">
+	  		SELECT B.BOARD_NO, 
+					B.BOARD_TITLE, 
+					B.BOARD_CONTENT, 
+					B.CREATE_DATE, 
+					B.BOARD_COUNT, 
+					M.USER_NICKNAME,
+					B.STATUS
+			FROM BOARD B
+			JOIN MEMBER M ON B.USER_NO = M.USER_NO
+			ORDER BY CREATE_DATE DESC
+	  </select>
+	  
+	  <!-- 게시글 정보 복구 -->
+		<update id="boardRestore" parameterType="_int">
+			UPDATE BOARD
+			SET STATUS = 'Y'
+			WHERE BOARD_NO = #{bno}
+		</update>
+		
+		<!-- 게시글 정보 삭제 -->
+		<update id="boardDelete" parameterType="_int">
+			UPDATE BOARD
+			SET STATUS = 'N'
+			WHERE BOARD_NO = #{bno}
+		</update>
+		
+		
+		<!-- 유저 검색 -->
+		<select id="selectSearchList" resultMap="memberResultSet" parameterType="string">
+		   SELECT * 
+		   FROM MEMBER
+		   WHERE LOWER(EMAIL) LIKE '%' || LOWER(#{keyword}) || '%'
+		</select>
+		
+		
+		<!-- 게시판 검색 -->
+		<select id="selectSearchBoard" resultMap="boardResultSet" parameterType="string">
+			SELECT *
+			FROM BOARD B
+			JOIN MEMBER M ON B.USER_NO = M.USER_NO
+			WHERE LOWER(EMAIL) LIKE '%' || LOWER(#{keyword}) || '%'
+		</select>
+		
+		
+		<!-- chatNo  -->
+		<!-- fromUser  -->
+		<!-- toUser -->
+		<!-- chatContent -->
+		<!-- 채팅 select -->
+		
+		<select id="selectChat" resultMap="chatResultSet">
+			SELECT CHAT_NO, FROM_USER, TO_USER, CHAT_CONTENT
+			FROM CHAT
+		</select>
+<!--   		<select id="selectChat" resultMap="chatResultSet"> -->
+<!--   			SELECT CHAT_CONTENT, FROM_USER, TO_USER, TO_CHAR(CREATE_DATE, 'MM"월" DD"일" HH24:MI') AS FORMATTED_CREATE_DATE -->
+<!-- 			FROM CHAT -->
+<!-- 			WHERE STATUS = 'Y' -->
+<!-- 			AND (FROM_USER = #{fromLogin} OR FROM_USER = #{toLogin}) -->
+<!-- 			AND (TO_USER = #{toLogin} OR TO_USER = #{fromLogin}) -->
+<!-- 			ORDER BY CREATE_DATE -->
+<!--   		</select> -->
+		
+		
+  </mapper>

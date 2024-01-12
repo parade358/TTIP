@@ -1,3 +1,18 @@
+/*여기가 해제 돼 있어서 하단이 보임*/
+html,
+body {
+    font-family: 'Roboto';
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/*공간 여백*/
+.root {
+    display: flex;
+}
+
+
 .signin-wrapper {
     text-align: center;
 }
@@ -42,9 +57,9 @@ h4 {
 }
 
 .signin-wrapper {
-    flex-grow: 1;
     background: rgb(244, 244, 245);
-    transition: all 0.32s ease-in;
+    width: 650px;
+    height: 700px;
 }
 
 .active {
@@ -71,6 +86,7 @@ h5 {
 
 .form,
 .form-wrapper {
+    display: flex;
     flex-direction: column;
     justify-content: center;
 }
@@ -78,7 +94,7 @@ h5 {
 .form-wrapper {
     background-color: white;
     width: 400px;
-    height: auto;
+    height: 450px;
     padding: 20px 0;
     margin: 20px auto;
     border-radius: 15px;

@@ -10,11 +10,11 @@
 <body>
 
 	<footer class="footer">
-        <div class="container">
+        <div class="containers">
             <p class="contact">1599-5319</p>
             <p class="middle-text">평일 10:00 - 18:00<br>(점심시간 13:00 - 14:00 제외 · 주말/공휴일 제외)</p>
         </div>
-        <div class="container terms">
+        <div class="containers terms">
             <div class="term-container">
                 <div class="term-list">
                     <a href="" id="a1" class="middle-text">이용약관</a>

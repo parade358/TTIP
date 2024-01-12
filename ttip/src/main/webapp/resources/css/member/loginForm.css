@@ -10,8 +10,6 @@ body {
 /*공간 여백*/
 .root {
     display: flex;
-    width: 100%;
-    height: 100%; /* 또는 height: 100vh; 로 수정 */
 }
 
 
@@ -55,6 +53,8 @@ h4 {
 
 .signin-wrapper {
     background: rgb(244, 244, 245);
+    width: 650px;
+    height: 700px;
 }
 
 .active {

@@ -16,4 +16,17 @@ public interface MemberService {
 	//이메일 중복체크
 	int EmailSend(String emailck);
 
+	//비밀번호 찾기
+	int findPwdCheck(String email);
+	
+	//비밀번호 수정
+	int updatePwd(Member m);
+
+	//마이페이지 수정
+	int updateMember(Member m);
+	
+	//탈퇴하기
+	int deleteMember(String userEmail);
+
+
 }

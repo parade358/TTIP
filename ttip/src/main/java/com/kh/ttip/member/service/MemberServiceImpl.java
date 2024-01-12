@@ -39,6 +39,30 @@ public class MemberServiceImpl implements MemberService {
 	public int EmailSend(String emailck) {
 		return memberDao.EmailSend(sqlSession, emailck);
 	}
+
+	//비밀번호 찾기
+	@Override
+	public int findPwdCheck(String email) {
+		return memberDao.findPwdCheck(sqlSession, email);
+	}
+
+	//비밀번호 수정
+	@Override
+	public int updatePwd(Member m) {
+		return memberDao.updatePwd(sqlSession, m);
+	}
 	
+	//마이페이지 수정
+	@Override
+	public int updateMember(Member m) {
+		
+		return memberDao.updateMember(sqlSession,m);
+	}
+
+	//탈퇴하기
+	@Override
+	public int deleteMember(String userEmail) {
+		return memberDao.deleteMember(sqlSession, userEmail);
+	}
 	
 }

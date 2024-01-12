@@ -15,7 +15,7 @@ public class WebsocketConfiguration implements WebSocketMessageBrokerConfigurer{
 		registry.addEndpoint("/chat").withSockJS();
 	}
 	
-	@Override
+	@Override 
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		registry.setApplicationDestinationPrefixes("/app").enableSimpleBroker("/topic");
 	}

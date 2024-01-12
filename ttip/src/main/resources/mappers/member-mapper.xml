@@ -27,16 +27,20 @@
 	  		         USER_NO
 	                ,EMAIL
 	                ,USER_PASSWORD
+					,USER_NAME
 	                ,USER_NICKNAME
 	                ,ADDRESS
-	                ,CATEGORY_NO)
+	                ,CATEGORY_NO
+	                ,GENDER)
 			VALUES (
 	               SEQ_MNO.NEXTVAL
 	              ,#{email}
 	        	  ,#{userPassword}
+	        	  ,#{userName}
 	        	  ,#{userNickName}
 	        	  ,#{address}
 	              ,#{categoryNo}
+	              ,#{gender}
 			)
   		</insert>
   		
@@ -77,5 +81,36 @@
 			WHERE EMAIL= #{email}
   		</select>
   		
+  		<!-- 비밀번호 찾기 -->
+  		<select id="findPwdCheck" resultType="_int" parameterType="string">
+  			SELECT count(*)
+			FROM MEMBER 
+			WHERE EMAIL= #{email}
+  		</select>
+  		
+  		<!-- 비밀번호 수정 -->
+  		<update id="updatePwd" parameterType="member">
+  			UPDATE MEMBER
+			SET USER_PASSWORD = #{userPassword}
+			WHERE EMAIL = #{email} 
+  		</update>
+  		
+		<!-- 마이페이지 수정 -->
+		<update id="updateMember" parameterType="member">
+  			UPDATE MEMBER
+			SET USER_NICKNAME = #{userNickName}
+			   ,GENDER = #{gender}
+			WHERE EMAIL = #{email}
+			AND STATUS = 'Y'
+  		</update>
+  		
+  		
+  		<!-- 회원 탈퇴 -->
+		<update id="deleteMember" parameterType="string">
+  			UPDATE MEMBER
+			SET STATUS = 'N'
+			WHERE EMAIL = #{userEmail}
+			AND STATUS = 'Y'
+  		</update>
   
   </mapper>

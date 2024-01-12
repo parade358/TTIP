@@ -21,4 +21,6 @@ public class Member {
 	private String categoryNo; // CATEGORY_NO NUMBER
 	private int userPoint; // USER_POINT NUMBER
 	private String status; // STATUS VARCHAR2(10 BYTE)
+	
+	
 }

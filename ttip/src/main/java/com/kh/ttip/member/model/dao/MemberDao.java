@@ -26,4 +26,26 @@ public class MemberDao {
 	public int EmailSend(SqlSessionTemplate sqlSession, String emailck) {
 		return sqlSession.selectOne("memberMapper.emailck", emailck);
 	}
+
+	//비밀번호 찾기
+	public int findPwdCheck(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("memberMapper.findPwdCheck", email);
+	}
+
+	//비밀번호 수정
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+
+	//마이페이지 수정
+	public int updateMember(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+
+	//탈퇴하기
+	public int deleteMember(SqlSessionTemplate sqlSession, String userEmail) {
+		return sqlSession.update("memberMapper.deleteMember", userEmail);
+	}
 }

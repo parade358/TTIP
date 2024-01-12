@@ -17,27 +17,9 @@ import com.kh.ttip.javamaster.storage.UserStorage;
 @RestController
 public class MessageController {
 	
-	 @Autowired
-	 private SimpMessagingTemplate simpMessagingTemplate;
 	 
 	 @Autowired
 	 private ChatService chatService; 
-
-	 @MessageMapping("/chat/{to}")
-	 public void sendMessage(@DestinationVariable String to, MessageModel message) {
-		 
-		 System.out.println("handling send message: " + message + " to: " + to);
-		 
-		 message.setToLogin(to);
-		 
-		 chatService.insertChat(message);
-		 
-	     boolean isExists = UserStorage.getInstance().getUsers().contains(to);
-	     
-	     if (isExists) {
-	         simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
-	     }
-	 }
 	 
 	 @PostMapping("selectChat")
 	 @ResponseBody
@@ -49,6 +31,16 @@ public class MessageController {
 		message.setToLogin(userName);
 		
 		ArrayList<MessageModel> list = chatService.selectChat(message);
+		
+		return list;
+	 }
+	 
+	 @PostMapping("selectChatUserList")
+	 @ResponseBody
+	 public ArrayList<MessageModel> selectChatUserList(String fromId){
+		
+		ArrayList<MessageModel> list = chatService.selectChatUserList(fromId);
+		
 		
 		return list;
 	 }

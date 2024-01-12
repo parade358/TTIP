@@ -95,14 +95,14 @@
             <img src="${contextPath }/resources/main/이미지3.jpg" class="d-block w-100" alt="">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+<!--         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> -->
+<!--           <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--           <span class="visually-hidden">Previous</span> -->
+<!--         </button> -->
+<!--         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> -->
+<!--           <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--           <span class="visually-hidden">Next</span> -->
+<!--         </button> -->
 	</div>
       
     <div id="mainBtn1" style="display: flex;
@@ -132,17 +132,7 @@
     	<div class="hover03" style="height: 70px;"><img src="${contextPath }/resources/main/sports.png" class="btnImg"><p>스포츠</p></div>
     </div> 
     
-    <div align="center" id="hot">
-    	인기게시글
-    </div> 
     
-    <div align="center" id="hotTalent">
-    	인기있는 재능
-    </div>
-    
-    <div align="center" id="etc">
-    	기타 등등
-    </div> 
 
     <!-- 푸터 -->
     <jsp:include page="common/footer.jsp"/>
